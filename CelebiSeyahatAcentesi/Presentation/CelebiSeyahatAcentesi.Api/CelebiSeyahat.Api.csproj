@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\CelebiSeyahatAcentesi.Infrastructure\CelebiSeyahat.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\CelebiSeyehat.Dto\CelebiSeyehat.Dto.csproj" />
     <ProjectReference Include="..\..\Core\CelebiSeyahatAcentesi.Application\CelebiSeyahat.Application.csproj" />
     <ProjectReference Include="..\..\Infrastructure\CelebiSeyahatAcentesi.Persistence\CelebiSeyahat.Persistence.csproj" />
   </ItemGroup>

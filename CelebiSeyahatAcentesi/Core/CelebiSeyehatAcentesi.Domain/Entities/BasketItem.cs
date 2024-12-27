@@ -10,8 +10,8 @@ namespace CelebiSeyahat.Domain.Entities
     public class BasketItem : BaseEntity
     {
         public string BasketId { get; set; }
-        public string TicketId { get; set; }
-        public string HotelReservationId { get; set; }
+        public string? TicketId { get; set; }
+        public string? HotelReservationId { get; set; }
         public int Price { get; set; } // decimal de olabilir
         public int Quantity { get; set; }
 

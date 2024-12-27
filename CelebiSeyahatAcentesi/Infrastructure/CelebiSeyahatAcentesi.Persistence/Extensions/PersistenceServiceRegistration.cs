@@ -12,6 +12,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CelebiSeyahat.Domain.Identity;
+using CelebiSeyahat.Application.Abstractions;
+using CelebiSeyahat.Persistence.Repositories;
+using CelebiSeyahat.Application.Repositories;
 
 namespace CelebiSeyahat.Persistence.Extensions
 {
@@ -22,23 +25,50 @@ namespace CelebiSeyahat.Persistence.Extensions
             services.AddDbContext<CelebiSeyehatDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentityCore<AppUser>(options =>
+            //services.AddIdentityCore<AppUser>(options =>
+            //{
+            //    options.User.RequireUniqueEmail = true;
+            //    //options.User.AllowedUserNameCharacters = string.Empty; 
+
+            //    options.SignIn.RequireConfirmedAccount = false;
+            //    options.SignIn.RequireConfirmedEmail = false;
+            //    options.Password.RequireDigit = false;
+            //    options.Password.RequiredLength = 3;
+            //    options.Password.RequireNonAlphanumeric = false;
+            //    options.Password.RequireUppercase = false;
+            //    options.Password.RequireLowercase = false;                
+            //}).AddRoles<AppRole>()
+            //.AddEntityFrameworkStores<CelebiSeyehatDbContext>()
+            //.AddSignInManager<SignInManager<AppUser>>()
+            //.AddDefaultTokenProviders();
+
+            services.AddIdentity<AppUser, AppRole>(options =>
             {
+                options.User.RequireUniqueEmail = true;
+
                 options.SignIn.RequireConfirmedAccount = false;
                 options.SignIn.RequireConfirmedEmail = false;
+
                 options.Password.RequireDigit = false;
                 options.Password.RequiredLength = 3;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireLowercase = false;
-            }).AddRoles<AppRole>()
+            })
             .AddEntityFrameworkStores<CelebiSeyehatDbContext>()
-            .AddSignInManager<SignInManager<AppUser>>()
             .AddDefaultTokenProviders();
             
+
             // ---- servisler
 
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<ILocationService, LocationService>();
+            services.AddScoped<ITripService, TripService>();
+
+            // ---- repolar
+
+            services.AddScoped<ITripRepository, TripRepository>();
 
         }
     }

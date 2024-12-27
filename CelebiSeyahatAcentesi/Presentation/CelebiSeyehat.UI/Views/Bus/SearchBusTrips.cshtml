@@ -1,0 +1,158 @@
+﻿@using CelebiSeyehat.UI.ViewModels.Trip
+@model PostTripFilterViewModel
+
+@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Triply</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="/CelebiSeyehat/css/utils.css">
+	<link rel="stylesheet" href="/CelebiSeyehat/css/home.css">
+
+
+
+</head>
+<body>
+	<header style="background-image: url('/CelebiSeyehat/img/otbüs.jpeg'); background-size: cover; background-repeat: no-repeat;">
+		<!-- Navbar -->
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<div class="container">
+				<a href="/Home/Index" class="navbar-brand fs-1 fw-bold me-4">triply</a>
+
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item"><a class="nav-link" href="/Plane/SearchPlaneTrips">Uçak</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">Otel</a></li>
+						<li class="nav-item"><a class="nav-link" href="/Bus/SearchBusTrips">Otobüs</a></li>
+						<li class="nav-item"><a class="nav-link" href="/Train/SearchTrainTrips">Tren</a></li>
+					</ul>
+					<div>
+						<div class="dropdown">
+							<button class="btn btn-outline-light dropdown-toggle " type="button" id="profileMenu" data-bs-toggle="dropdown" aria-expanded="false">
+								Profil
+							</button>
+							<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileMenu">
+								<li><a class="dropdown-item" href="/User/MyTripTickets">Biletlerim</a></li>
+								<li><a class="dropdown-item" href="/User/MyHotelReservations">Otel Rezervasyonlarım</a></li>
+								<li><span class="dropdown-item" >Puanlarım : 15</span></li>
+								<li><a class="dropdown-item" href="/User/Notifications">Bildirimler</a></li>
+								<li><a class="dropdown-item" href="#">Çıkış</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+
+		<!-- Search Card -->
+		<div class="container position-absolute top-50 start-50 translate-middle ">
+
+			<h1 class="text-center text-white overlay-text ">Nereye gitmek istersin?</h1><br>
+
+			<form asp-action="SearchBusTrips" method="post">
+				<input type="hidden" asp-for="TransportationType" value="0" />
+				<div id="searchCard" class="row search-card ">
+					<div class="col-md-3 mb-3 ">
+						<label class="form-label">Nereden</label>
+						<select asp-for="FromCity" class="form-select">
+							<option value="">Şehir seçiniz</option>
+							@foreach (var city in ViewBag.Locations)
+							{
+								<option value="@city.Name">@city.Name</option>
+							}
+						</select>
+					</div>
+					<div class="col-md-3 mb-3">
+						<label class="form-label">Nereye</label>
+						<select asp-for="ToCity" class="form-select">
+							<option value="">Şehir seçiniz</option>
+							@foreach (var city in ViewBag.Locations)
+							{
+								<option value="@city.Name">@city.Name</option>
+							}
+						</select>
+					</div>
+					<div class="col-md-2 mb-3">
+						<label class="form-label">Gidiş Tarihi</label>
+						<input asp-for="Date" type="date" id="tarih" class="form-control">
+					</div>
+					<div class="col-md-2 mb-3">
+						<label for="yolcuSayisi" class="form-label">Yolcu Sayısı</label>
+						<select asp-for="PassengerCount" id="yolcuSayisi" class="form-select">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+						</select>
+					</div>
+					<div class="col-md-2 d-flex align-items-center">
+						<button type="submit" class="btn btn-primary w-100">Otobüs Bileti Bul</button>
+					</div>
+
+				</div>
+			</form>
+
+		</div>
+	</header>
+
+
+
+
+	<!-- Footer -->
+	<footer class="footer">
+		<div class="container">
+			<div class="row">
+				<!-- Logo -->
+				<div class="col-md-4">
+					<h4 class="footer-title">triply</h4>
+					<p>Yolculuklar burada başlar, hatıralar sonsuza kadar sürer...</p>
+				</div>
+
+				<div class="col-md-4">
+					<h5>Hızlı Linkler</h5>
+					<ul class="footer-links">
+						<li><a href="home.html">Ana Sayfa</a></li>
+						<li><a href="uçak.html">Uçak</a></li>
+						<li><a href="otel.html">Otel</a></li>
+						<li><a href="otobüs.html">Otobüs</a></li>
+						<li><a href="tren.html">Tren</a></li>
+					</ul>
+				</div>
+				<!-- Sosyal Medya ve İletişim -->
+				<div class="col-md-4">
+					<h5>Bize Ulaşın</h5>
+					<ul class="footer-contact">
+						<li>Email: <a href="mailto:info@triply.com">info@triply.com</a></li>
+						<li>Telefon: <a href="tel:+902121234567">+90 212 123 45 67</a></li>
+						<li>
+							<a href="#"><i class="fab fa-facebook"></i></a>
+							<a href="#"><i class="fab fa-instagram"></i></a>
+							<a href="#"><i class="fab fa-twitter"></i></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="text-center mt-4">
+				<p>&copy; 2024 Triply. Tüm hakları saklıdır.</p>
+			</div>
+		</div>
+	</footer>
+
+
+
+
+
+
+	<script src="script.js"></script>
+	<script src="fırsat.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

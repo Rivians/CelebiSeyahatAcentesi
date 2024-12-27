@@ -1,0 +1,57 @@
+﻿@using CelebiSeyehat.UI.ViewModels.Location
+@model List<LocationListViewModel>
+
+@{
+	Layout = null;
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/CelebiSeyehat/css/utils.css">
+<link rel="stylesheet" href="/CelebiSeyehat/css/home.css">
+
+
+<div id="searchCard" class="row search-card ">
+
+	<form action="SearchBusTrips" method="post">
+		<div class="col-md-3 mb-3 ">
+			<label for="nereden" class="form-label">Nereden</label>
+			<select>
+				<option value="">Şehir seçiniz</option>
+				@foreach (var city in Model)
+				{
+					<option value="@city.Name">@city.Name</option>
+				}
+			</select>
+		</div>
+		<div class="col-md-3 mb-3">
+			<label for="nereye" class="form-label">Nereye</label>
+			<select>
+				<option value="">Şehir seçiniz</option>
+				@foreach (var city in Model)
+				{
+					<option value="@city.Name">@city.Name</option>
+				}
+			</select>
+		</div>
+		<div class="col-md-3 mb-3">
+			<label for="tarih" class="form-label">Gidiş Tarihi</label>
+			<input type="date" id="tarih" class="form-control">
+		</div>
+		<div class="col-md-2 mb-3">
+			<label for="yolcuSayisi" class="form-label">Yolcu Sayısı</label>
+			<select id="yolcuSayisi" class="form-select">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+			</select>
+		</div>
+		<div class="col-md-1 d-flex align-items-center">
+			<button type="submit" class="btn btn-primary w-100">Ara</button>
+		</div>
+	</form>
+
+
+</div>

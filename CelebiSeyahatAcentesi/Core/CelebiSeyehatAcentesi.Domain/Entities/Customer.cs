@@ -15,6 +15,8 @@ namespace CelebiSeyahat.Domain.Entities
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string AppUserId { get; set; }     // customer - appUser 1'e 1 ilişkisinde, bağımlı olan taraf custoemr oldugu için foreign key burada olacak.
+        public string? TcNo { get; set; }
+
 
 
         public AppUser AppUser { get; set; }

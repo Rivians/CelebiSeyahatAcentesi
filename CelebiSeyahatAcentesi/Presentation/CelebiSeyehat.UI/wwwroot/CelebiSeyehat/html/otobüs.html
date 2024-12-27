@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Triply</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/CelebiSeyehat/css/utils.css">
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
+    <link rel="stylesheet" href="/CelebiSeyehat/css/home.css">
+   
+
+  
+</head>
+<body>
+    <header style="background-image: url('img/otbüs.jpeg'); background-size: cover; background-repeat: no-repeat;">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container">
+                <a href="home.html" class="navbar-brand fs-1 fw-bold me-4">triply</a>
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link " href="uçak.html">Uçak</a></li>
+                        <li class="nav-item"><a class="nav-link" href="otel.html">Otel</a></li>
+                        <li class="nav-item"><a class="nav-link" href="otobüs.html">Otobüs</a></li>
+                        <li class="nav-item "><a class="nav-link" href="tren.html">Tren</a></li>
+                    </ul>
+                    <div>
+                        <a href="login.html" class="btn btn-outline-light">Giriş Yap</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Search Card -->
+        <div class="container position-absolute top-50 start-50 translate-middle ">
+            
+            <h1 class="text-center text-white overlay-text ">Nereye gitmek istersin?</h1><br>
+            
+            <div id="searchCard" class="row search-card ">
+                <div class="col-md-3 mb-3 ">
+                    <label for="nereden" class="form-label">Nereden</label>
+                    <input type="text" id="nereden" class="form-control" placeholder="Şehir">
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="nereye" class="form-label">Nereye</label>
+                    <input type="text" id="nereye" class="form-control" placeholder="Şehir">
+                </div>
+                <div class="col-md-2 mb-3">
+                    <label for="tarih" class="form-label">Gidiş Tarihi</label>
+                    <input type="date" id="tarih" class="form-control">
+                </div>
+                <div class="col-md-2 mb-3">
+                    <label for="yolcuSayisi" class="form-label">Yolcu Sayısı</label>
+                    <select id="yolcuSayisi" class="form-select">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+                <div class="col-md-2 d-flex align-items-center">
+                    <button class="btn btn-primary w-100">Otobüs Bileti Bul</button>
+                </div>
+                
+            </div>
+        </div>
+    </header>
+
+
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <!-- Logo -->
+                <div class="col-md-4">
+                    <h4 class="footer-title">triply</h4>
+                    <p>Yolculuklar burada başlar, hatıralar sonsuza kadar sürer...</p>
+                </div>
+                
+                <div class="col-md-4">
+                    <h5>Hızlı Linkler</h5>
+                    <ul class="footer-links">
+                        <li><a href="home.html">Ana Sayfa</a></li>
+                        <li><a href="uçak.html">Uçak</a></li>
+                        <li><a href="otel.html">Otel</a></li>
+                        <li><a href="otobüs.html">Otobüs</a></li>
+                        <li><a href="tren.html">Tren</a></li>
+                    </ul>
+                </div>
+                <!-- Sosyal Medya ve İletişim -->
+                <div class="col-md-4">
+                    <h5>Bize Ulaşın</h5>
+                    <ul class="footer-contact">
+                        <li>Email: <a href="mailto:info@triply.com">info@triply.com</a></li>
+                        <li>Telefon: <a href="tel:+902121234567">+90 212 123 45 67</a></li>
+                        <li>
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <p>&copy; 2024 Triply. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+    
+
+    
+                        
+
+
+    <script src="script.js"></script>
+    <script src="fırsat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

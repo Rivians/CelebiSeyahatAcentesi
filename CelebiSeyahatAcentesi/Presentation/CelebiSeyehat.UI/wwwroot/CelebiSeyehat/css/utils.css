@@ -1,0 +1,255 @@
+/* Ortak Kullanılan Stiller */
+/* :root{
+    --white: #fff;
+    
+    --primary: #539092;
+    --secondary: #ffffff;
+    --success: #8BCFCC;
+    --danger: #AEE8E6;
+    --warning: #F5FAC8;
+    --info: #7AB2B2;
+    --dark: #274344;
+    --light: #EEF7FF;
+}
+/* text color */
+.text-primary{color: var(--primary);}
+.text-secondary{color: var(--secondary);}
+.text-success{color: var(--success);}
+.text-danger{color: var(--danger);}
+.text-warning{color: var(--warning);}
+.text-info{color: var(--info);}
+.text-dark{color: var(--dark);}
+.text-light{color: var(--light);}
+
+
+
+/* background color */
+.bg-primary{background-color: var(--primary);}
+.bg-secondary{background-color: var(--secondary);}
+.bg-success{background-color: var(--success);}
+.bg-danger{background-color: var(--danger);}
+.bg-warning{background-color: var(--warning);}
+.bg-info{background-color: var(--info);}
+.bg-dark{background-color: var(--dark);}
+.bg-light{background-color: var(--light);}
+
+
+
+/* buttons */
+.btn{
+    cursor: pointer;
+    display: inline-block;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 5px;
+}
+.btn:hover{
+    opacity: 0.8;
+}
+.btn-primary{
+    background-color: var(--primary);
+    color: var(--primary);
+    border: solid(--light)
+}
+.btn-secondary{
+    background-color: var(--secondary);
+    color: var(--light);
+}
+.btn-success{
+    background-color: var(--success);
+    color: var(--white);
+}
+.btn-danger{
+    background-color: var(--danger);
+    color: var(--white);
+}
+.btn-warning{
+    background-color: var(--warning);
+    color: var(--white);
+}
+.btn-info{
+    background-color: var(--info);
+    color: var(--white);
+}
+.btn-light{
+    background-color: var(--light);
+    color: var(--dark);
+}
+.btn-dark{
+    background-color: var(--dark);
+    color: var(--white);
+}
+
+.btn-outline{
+    background: transparent;
+    border: 1px solid var(--light); 
+    color: var(--light);
+
+}
+
+.btn-outline-primary{
+    background: transparent;
+    border: 1px solid; 
+    color: var(--dark)
+}
+.btn-outline-primary:hover{
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+
+/* Navbar Tasarımı */
+.navbar {
+    background-color: rgba(83, 144, 146, 0.747);
+}
+.navbar .logo {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+.navbar-nav {
+    margin-left: auto;
+}
+.nav-link {
+    color: #ffffff;
+    font-size: 1.2rem;
+    margin-right: 20px;
+    
+
+} 
+/* Form Stilleri */
+.form-control {
+    background-color: transparent;
+    border: none; 
+    border-bottom: 3px solid #539092; 
+    border-radius: 10px;
+    box-shadow: none; 
+    outline: none; 
+    font-size: 1rem;
+}
+
+.form-control:focus {
+    border-bottom: 3px solid #539092;
+}
+
+/* Genel Metin ve Renk Stilleri */
+.text-primary {
+    color: #539092;
+}
+
+.text-muted {
+    color: #777;
+}
+
+/* Genel Düğme Stilleri */
+.btn-outline-light {
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
+.btn-outline-light:hover {
+    background-color: #ffffff;
+    color: #539092;
+} */
+
+/* Esnek Yerleşim */
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.min-vh-100 {
+    min-height: 100vh;
+}
+
+/* Margin ve Padding */
+.mt-3 {
+    margin-top: 1rem;
+}
+
+.mb-3 {
+    margin-bottom: 1rem;
+}
+
+.p-3 {
+    padding: 1rem;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+
+/* Footer Genel Tasarım */
+.footer {
+    background-color: #376062;
+    color: #ffffff;
+    padding: 40px 0;
+    font-size: 0.9rem;
+}
+
+.footer-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+.footer p {
+    line-height: 1.6;
+    color: #dcdcdc;
+}
+
+.footer h5 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+.footer-links,
+.footer-contact {
+    list-style: none;
+    padding-left: 0;
+}
+
+.footer-links li,
+.footer-contact li {
+    margin-bottom: 10px;
+}
+
+.footer-links a,
+.footer-contact a {
+    color: #dcdcdc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover,
+.footer-contact a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.footer-contact a i {
+    font-size: 1.2rem;
+    margin-right: 10px;
+    color: #ffffff;
+    transition: color 0.3s ease;
+}
+
+.footer-contact a i:hover {
+    color: #dcdcdc;
+}
+
+/* Responsive Tasarım */
+@media (max-width: 768px) {
+    .footer .row {
+        text-align: center;
+    }
+    .footer-links,
+    .footer-contact {
+        margin-top: 20px;
+    }
+}

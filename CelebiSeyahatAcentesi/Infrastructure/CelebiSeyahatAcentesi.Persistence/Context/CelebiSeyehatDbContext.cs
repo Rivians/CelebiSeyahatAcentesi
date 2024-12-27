@@ -43,8 +43,9 @@ namespace CelebiSeyahat.Persistence.Context
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
-        public DbSet<TransportationCompany> TransportationCompanys { get; set; }
+        public DbSet<TransportationCompany> TransportationCompanies { get; set; }
         public DbSet<Trip> Trips { get; set; }
+        public DbSet<Location> Locations { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -96,7 +97,6 @@ namespace CelebiSeyahat.Persistence.Context
                 .WithMany() // tek taraflı ilişki kuruyoruz
                 .HasForeignKey(b => b.HotelReservationId)
                 .OnDelete(DeleteBehavior.Restrict);
-
         }
 
     }

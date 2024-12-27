@@ -19,6 +19,7 @@ namespace CelebiSeyahat.Domain.Entities
         public int AvailableSeats { get; set; }
         public string TransportationCompanyId { get; set; }
         public TransportationType TransportationType  { get; set; }
+        public string CompanyCoverImageUrl { get; set; }
 
 
         public TransportationCompany TransportationCompany { get; set; }

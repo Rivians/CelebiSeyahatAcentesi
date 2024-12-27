@@ -25,8 +25,11 @@ namespace CelebiSeyahat.Domain.Identity
         public DateTime CreatedAtUtc { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedAtUtc { get; set; }
         public bool IsDeleted { get; set; }
-        
 
+
+        // AppUser ile AppRole arasında çok'a çok ilişki var. Bunu manuel olarak yapmaya kalsak identity kütüphanesindeki hazır metotları kullanamıyor olucaktık.
+        // Bu yüzde List<AppRole> Roles { get; set; } yapmaktansa IdentityUserRole ara tablosunu kullanıyoruz ve key'in string oldugunu söylüyoruz.
+        //public virtual ICollection<IdentityUserRole<string>> UserRoles { get; set; }  
         public Customer Customer { get; set; }
     }
 }

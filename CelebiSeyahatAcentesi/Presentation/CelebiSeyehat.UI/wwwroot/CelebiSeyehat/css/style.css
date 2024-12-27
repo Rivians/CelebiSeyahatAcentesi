@@ -1,0 +1,80 @@
+/* Genel Gövde Stili */
+body {
+    font-family: Inter, sans-serif;
+    background-image: url('img/paris.jpeg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    color: #ffffff;
+    position: relative;
+}
+
+
+/* Kart Tasarımı */
+.card-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+}
+
+.card-custom {
+    background-color: #ffffffc5;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 45%;
+    padding: 40px;
+}
+
+/* Form Container */
+.form-container h2 {
+    color: #539092;
+}
+
+.form-container button {
+    background-color: #539092;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    padding: 12px;
+    width: 100%;
+}
+
+.form-container button:hover {
+    background-color: #539092;
+}
+.form-container p {
+    font-size: 0.9rem;
+    color: #777;
+}
+.form-container a {
+    color: #539092;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+.form-control {
+    background-color: transparent;
+    border: none; 
+    border-bottom: 3px solid #539092; 
+    border-radius: 10px;
+    box-shadow: none; 
+    outline: none; 
+    font-size: 1rem;
+}
+.form-control:focus {
+    border-bottom: 3px solid #539092;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .card-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .card-custom {
+        width: 100%;
+    }
+}

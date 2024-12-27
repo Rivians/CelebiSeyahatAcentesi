@@ -27,7 +27,7 @@ namespace CelebiSeyahat.Persistence.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("CreatedTime")
+                    b.Property<DateTime?>("CreatedTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CustomerId")
@@ -60,11 +60,10 @@ namespace CelebiSeyahat.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("CreatedTime")
+                    b.Property<DateTime?>("CreatedTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("HotelReservationId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Price")
@@ -74,7 +73,6 @@ namespace CelebiSeyahat.Persistence.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("TicketId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime?>("UpdatedTime")
@@ -100,7 +98,7 @@ namespace CelebiSeyahat.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("CreatedTime")
+                    b.Property<DateTime?>("CreatedTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -119,6 +117,9 @@ namespace CelebiSeyahat.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("TcNo")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("UpdatedTime")
                         .HasColumnType("datetime2");
 
@@ -135,7 +136,7 @@ namespace CelebiSeyahat.Persistence.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("CreatedTime")
+                    b.Property<DateTime?>("CreatedTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Location")
@@ -165,7 +166,7 @@ namespace CelebiSeyahat.Persistence.Migrations
                     b.Property<DateTime>("CheckOutDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("CreatedTime")
+                    b.Property<DateTime?>("CreatedTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CustomerId")
@@ -197,12 +198,32 @@ namespace CelebiSeyahat.Persistence.Migrations
                     b.ToTable("HotelReservations");
                 });
 
+            modelBuilder.Entity("CelebiSeyahat.Domain.Entities.Location", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Locations");
+                });
+
             modelBuilder.Entity("CelebiSeyahat.Domain.Entities.LoyaltyPoint", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("CreatedTime")
+                    b.Property<DateTime?>("CreatedTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CustomerId")
@@ -231,7 +252,7 @@ namespace CelebiSeyahat.Persistence.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("CreatedTime")
+                    b.Property<DateTime?>("CreatedTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CustomerId")
@@ -262,6 +283,45 @@ namespace CelebiSeyahat.Persistence.Migrations
                     b.ToTable("Notifications");
                 });
 
+            modelBuilder.Entity("CelebiSeyahat.Domain.Entities.Passenger", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TcNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TicketId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("UpdatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TicketId")
+                        .IsUnique();
+
+                    b.ToTable("Passenger");
+                });
+
             modelBuilder.Entity("CelebiSeyahat.Domain.Entities.Payment", b =>
                 {
                     b.Property<string>("Id")
@@ -274,7 +334,7 @@ namespace CelebiSeyahat.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("CreatedTime")
+                    b.Property<DateTime?>("CreatedTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CustomerId")
@@ -308,22 +368,19 @@ namespace CelebiSeyahat.Persistence.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("CreatedTime")
+                    b.Property<DateTime?>("CreatedTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CustomerId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Departure")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DepartureDate")
+                    b.Property<DateTime?>("DepartureDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Destination")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Price")
@@ -334,6 +391,7 @@ namespace CelebiSeyahat.Persistence.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("TripId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime?>("UpdatedTime")
@@ -355,7 +413,7 @@ namespace CelebiSeyahat.Persistence.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("CreatedTime")
+                    b.Property<DateTime?>("CreatedTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -370,7 +428,7 @@ namespace CelebiSeyahat.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TransportationCompanys");
+                    b.ToTable("TransportationCompanies");
                 });
 
             modelBuilder.Entity("CelebiSeyahat.Domain.Entities.Trip", b =>
@@ -384,7 +442,11 @@ namespace CelebiSeyahat.Persistence.Migrations
                     b.Property<int>("AvailableSeats")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedTime")
+                    b.Property<string>("CompanyCoverImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreatedTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Departure")
@@ -664,14 +726,12 @@ namespace CelebiSeyahat.Persistence.Migrations
                     b.HasOne("CelebiSeyahat.Domain.Entities.HotelReservation", "HotelReservation")
                         .WithMany()
                         .HasForeignKey("HotelReservationId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("CelebiSeyahat.Domain.Entities.Ticket", "Ticket")
                         .WithMany()
                         .HasForeignKey("TicketId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Basket");
 
@@ -732,6 +792,17 @@ namespace CelebiSeyahat.Persistence.Migrations
                     b.Navigation("Customer");
                 });
 
+            modelBuilder.Entity("CelebiSeyahat.Domain.Entities.Passenger", b =>
+                {
+                    b.HasOne("CelebiSeyahat.Domain.Entities.Ticket", "Ticket")
+                        .WithOne("Passenger")
+                        .HasForeignKey("CelebiSeyahat.Domain.Entities.Passenger", "TicketId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Ticket");
+                });
+
             modelBuilder.Entity("CelebiSeyahat.Domain.Entities.Payment", b =>
                 {
                     b.HasOne("CelebiSeyahat.Domain.Entities.Basket", "Basket")
@@ -755,9 +826,7 @@ namespace CelebiSeyahat.Persistence.Migrations
                 {
                     b.HasOne("CelebiSeyahat.Domain.Entities.Customer", "Customer")
                         .WithMany("Tickets")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CustomerId");
 
                     b.HasOne("CelebiSeyahat.Domain.Entities.TransportationCompany", "TransportationCompany")
                         .WithMany("Tickets")
@@ -767,7 +836,9 @@ namespace CelebiSeyahat.Persistence.Migrations
 
                     b.HasOne("CelebiSeyahat.Domain.Entities.Trip", "Trip")
                         .WithMany("Tickets")
-                        .HasForeignKey("TripId");
+                        .HasForeignKey("TripId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Customer");
 
@@ -866,6 +937,12 @@ namespace CelebiSeyahat.Persistence.Migrations
             modelBuilder.Entity("CelebiSeyahat.Domain.Entities.Hotel", b =>
                 {
                     b.Navigation("Reservations");
+                });
+
+            modelBuilder.Entity("CelebiSeyahat.Domain.Entities.Ticket", b =>
+                {
+                    b.Navigation("Passenger")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("CelebiSeyahat.Domain.Entities.TransportationCompany", b =>

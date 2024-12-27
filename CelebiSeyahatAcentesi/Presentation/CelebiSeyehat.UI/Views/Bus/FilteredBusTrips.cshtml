@@ -1,0 +1,192 @@
+﻿@using CelebiSeyehat.Dto.Trip
+@model List<GetFilteredTripsQueryResponseDto>
+
+@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Login</title>
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="/CelebiSeyehat/css/utils.css">
+	<link rel="stylesheet" href="/CelebiSeyehat/css/style.css">
+	<link rel="stylesheet" href="/CelebiSeyehat/css/search.css">
+
+
+
+
+</head>
+<body>
+	<!-- Navbar -->
+	<nav class="navbar navbar-expand-lg navbar-dark">
+		<div class="container">
+			<a href="/Home/Index" class="navbar-brand fs-1 fw-bold me-4">triply</a>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link" href="/Plane/SearchPlaneTrips">Uçak</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Otel</a></li>
+					<li class="nav-item"><a class="nav-link" href="/Bus/SearchBusTrips">Otobüs</a></li>
+					<li class="nav-item"><a class="nav-link" href="/Train/SearchTrainTrips">Tren</a></li>
+				</ul>
+				<div>
+					<div class="dropdown">
+						<button class="btn btn-outline-light dropdown-toggle " type="button" id="profileMenu" data-bs-toggle="dropdown" aria-expanded="false">
+							Profil
+						</button>
+						<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileMenu">
+							<li><a class="dropdown-item" href="#">Biletlerim</a></li>
+							<li><a class="dropdown-item" href="#">Otel Rezervasyonlarım</a></li>
+							<li><a class="dropdown-item" href="#">Puanlarım</a></li>
+							<li><a class="dropdown-item" href="#">Bildirimler</a></li>
+							<li><a class="dropdown-item" href="#">Çıkış</a></li>
+						</ul>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</nav>
+
+
+	<div class="container">
+		<div class="row">
+			<!-- Filtreleme -->
+			<aside class="filters col-md-3">
+				<h3>Filtreler</h3>
+
+
+				<button class="accordion filter-group">Kalkış Saati</button>
+				<div class="panel">
+					<label class="tk"><input type="checkbox"> Gece</label>
+					<label class="tk"><input type="checkbox"> Sabah</label>
+					<label class="tk"><input type="checkbox"> Öğle</label>
+					<label class="tk"><input type="checkbox"> Akşam</label>
+				</div>
+
+				<button class="accordion filter-group">Oturma Düzeni</button>
+				<div class="panel">
+					<label class="tk"><input type="checkbox"> 1+1 Koltuk</label>
+					<label class="tk"><input type="checkbox"> 2+1 Koltuk</label>
+					<label class="tk"><input type="checkbox"> 2+2 Koltuk</label>
+
+				</div>
+
+				<button class="accordion filter-group">Firma</button>
+				<div class="panel">
+					<label class="tk"><input type="checkbox"> Pamukkale</label>
+					<label class="tk"><input type="checkbox"> Nilüfer</label>
+					<label class="tk"><input type="checkbox"> Metro</label>
+					<label class="tk"><input type="checkbox"> Kamil Koç</label>
+				</div>
+
+				<button class="accordion filter-group">Fiyat Aralığı</button>
+				<div class="panel">
+					<div class="price-range">
+						<p>100tl</p>
+						<input type="range" min="100" max="1000">
+						<p>1000tl</p>
+					</div>
+				</div>
+
+				<button class="accordion filter-group">Kalkış Yeri</button>
+				<div class="panel">
+					<label class="tk"><input type="checkbox"> İstanbul</label>
+					<label class="tk"><input type="checkbox"> İzmir</label>
+					<label class="tk"><input type="checkbox"> Çanakkale</label>
+					<label class="tk"><input type="checkbox"> Kocaeli</label>
+					<label class="tk"><input type="checkbox"> Bandırma</label>
+				</div>
+
+				<button class="accordion filter-group">Varış Yeri</button>
+				<div class="panel">
+					<label class="tk"><input type="checkbox"> İstanbul</label>
+					<label class="tk"><input type="checkbox"> İzmir</label>
+					<label class="tk"><input type="checkbox"> Çanakkale</label>
+					<label class="tk"><input type="checkbox"> Kocaeli</label>
+					<label class="tk"><input type="checkbox"> Bandırma</label>
+				</div>
+
+			</aside>
+
+			<!-- Bilet Kartları -->
+			<main class="tickets col-md-9">
+				<h2>Mevcut Biletler</h2>
+				<!-- Bilet Card -->
+				@foreach (var item in Model)
+				{
+					<div class="ticket-card">
+						<div class="column firm">
+							<img class="logo" src="@item.CompanyCoverImageUrl" alt="">
+							<p>@item.Departure → @item.Destination </p>
+						</div>
+						<div class="column seating">
+							<p>2+1</p>
+						</div>
+						<div class="column time">
+							<p>@item.DepartureDate.TimeOfDay</p>
+							<p>6 saat</p>
+						</div>
+						<div class="column price">
+							<p>@item.TicketPrice TL</p>
+						</div>
+						<div class="column button">
+							<a asp-controller="Bus" asp-action="Reservation" asp-route-tripId="@item.Id">Seç</a>			@* BU KISIM'DAKİ BUTON YERİNE A ETİKETİ KOYULDU *@
+						</div>
+					</div>
+				}
+			</main>
+		</div>
+	</div>
+
+
+	<!-- Footer -->
+	<footer class="footer">
+		<div class="container">
+			<div class="row">
+				<!-- Logo -->
+				<div class="col-md-4">
+					<h4 class="footer-title">triply</h4>
+					<p>Yolculuklar burada başlar, hatıralar sonsuza kadar sürer...</p>
+				</div>
+
+				<div class="col-md-4">
+					<h5>Hızlı Linkler</h5>
+					<ul class="footer-links">
+						<li><a href="#">Ana Sayfa</a></li>
+						<li><a href="#">Uçak</a></li>
+						<li><a href="#">Otel</a></li>
+						<li><a href="#">Otobüs</a></li>
+						<li><a href="#">Tren</a></li>
+					</ul>
+				</div>
+				<!-- Sosyal Medya ve İletişim -->
+				<div class="col-md-4">
+					<h5>Bize Ulaşın</h5>
+					<ul class="footer-contact">
+						<li>Email: <a href="mailto:info@triply.com">info@triply.com</a></li>
+						<li>Telefon: <a href="tel:+902121234567">+90 212 123 45 67</a></li>
+						<li>
+							<a href="#"><i class="fab fa-facebook"></i></a>
+							<a href="#"><i class="fab fa-instagram"></i></a>
+							<a href="#"><i class="fab fa-twitter"></i></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="text-center mt-4">
+				<p>&copy; 2024 Triply. Tüm hakları saklıdır.</p>
+			</div>
+		</div>
+	</footer>
+
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="/CelebiSeyehat/js/accordion.js"></script>
+</body>
+</html>
