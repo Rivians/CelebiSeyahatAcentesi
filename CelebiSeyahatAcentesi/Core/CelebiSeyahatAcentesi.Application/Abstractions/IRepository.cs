@@ -10,8 +10,10 @@ namespace CelebiSeyahat.Application.Abstractions
     public interface IRepository<T> where T : class
     {
         Task<List<T>> GetAllAsync();
+        Task<List<T>> GetAllAsync(Expression<Func<T,bool>> filter);
         Task<IQueryable<T>> GetAllQueryableAsync();  // buraya list türünde değilde iqueryable türünde sorgu ekledik.
         Task<T> GetByIdAsync(string id);
+        Task<T> Get(Expression<Func<T, bool>> filter);
         Task AddAsync(T entity);
         Task AddRangeAsync(List<T> entity);
         Task UpdateAsync(T entity);

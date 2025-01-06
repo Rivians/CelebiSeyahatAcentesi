@@ -1,0 +1,157 @@
+﻿@using CelebiSeyehat.Dto.TransportationCompany
+@model List<TransportationCompanyDto>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Müşteriler</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .sidebar {
+            height: 100vh;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #343a40;
+            padding-top: 60px; /* Navbar yüksekliğine göre padding */
+        }
+
+            .sidebar a {
+                padding: 15px 10px;
+                text-decoration: none;
+                font-size: 18px;
+                color: #ffffff;
+                display: block;
+            }
+
+                .sidebar a:hover {
+                    background-color: #495057;
+                    color: white;
+                }
+
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+            margin-top: 60px; /* Navbar yüksekliğine göre margin */
+        }
+
+        .navbar {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .styled-table {
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 18px;
+            min-width: 100%;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+
+            .styled-table thead tr {
+                background-color: #343a40;
+                color: #ffffff;
+                text-align: left;
+            }
+
+            .styled-table th,
+            .styled-table td {
+                padding: 12px 15px;
+            }
+
+            .styled-table tbody tr {
+                border-bottom: 1px solid #dddddd;
+            }
+
+                .styled-table tbody tr:nth-of-type(even) {
+                    background-color: #f3f3f3;
+                }
+
+                .styled-table tbody tr:last-of-type {
+                    border-bottom: 2px solid #343a40;
+                }
+
+                .styled-table tbody tr:hover {
+                    background-color: #f5f5f5;
+                    cursor: pointer;
+                }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Admin Panel</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Anasayfa</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Profil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Çıkış</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a href="/Admin/CustomerList">Müşteriler</a>
+        <a href="/Admin/TransportationCompanyList">Taşıma Şirketleri</a>
+        <a href="/Admin/HotelList">Oteller</a>
+        <a href="/Admin/TripList">Seferler</a>
+        <a href="/Admin/Statistics">İstatistikler</a>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <h2>Müşteriler</h2>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Şirket ID</th>
+                    <th>Şirket Adı</th>
+                    <th>Taşıt Türü</th>
+                    <th>Oluşturulma Tarihi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td>@item.TransportationType</td>
+                        <td>@item.CreatedTime</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

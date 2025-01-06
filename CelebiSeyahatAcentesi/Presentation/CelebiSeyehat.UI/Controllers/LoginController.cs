@@ -1,6 +1,8 @@
-﻿using CelebiSeyehat.UI.ViewModels.Login;
+﻿using CelebiSeyehat.Dto.Token;
+using CelebiSeyehat.UI.ViewModels.Login;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace CelebiSeyehat.UI.Controllers
 {
@@ -30,13 +32,11 @@ namespace CelebiSeyehat.UI.Controllers
 
                 if (response.IsSuccessStatusCode)
                 {
-                    var result = await response.Content.ReadAsStringAsync();
-                    ViewBag.Result = "Giriş başarılı!";
+                    var jsonDataToken = await response.Content.ReadAsStringAsync();
+                    var tokenResponse = JsonConvert.DeserializeObject<TokenDto>(jsonDataToken);
+
+                    HttpContext.Session.SetString("Token", tokenResponse.AccessToken);  // burada tokenı session içerisine koyuyoruz.
                     return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    ViewBag.Error = "Hatalı giriş!";
                 }
             }
             catch (HttpRequestException ex) { 

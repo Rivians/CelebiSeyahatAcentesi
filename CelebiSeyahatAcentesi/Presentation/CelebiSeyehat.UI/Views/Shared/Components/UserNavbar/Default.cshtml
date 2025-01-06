@@ -1,0 +1,35 @@
+﻿@using CelebiSeyehat.Dto.AppUser
+@model AppUserDto
+
+@{
+	Layout = null;
+}
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+	<div class="container">
+		<a href="/Home/Index" class="navbar-brand fs-1 fw-bold me-4">triply</a>
+
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<li class="nav-item"><a class="nav-link" href="/Plane/SearchPlaneTrips">Uçak</a></li>
+				<li class="nav-item"><a class="nav-link" href="/Hotel/SearchHotel">Otel</a></li>
+				<li class="nav-item"><a class="nav-link" href="/Bus/SearchBusTrips">Otobüs</a></li>
+				<li class="nav-item"><a class="nav-link" href="/Train/SearchTrainTrips">Tren</a></li>
+			</ul>
+			<div>
+				<div class="dropdown">
+					<button class="btn btn-outline-light dropdown-toggle " type="button" id="profileMenu" data-bs-toggle="dropdown" aria-expanded="false">
+						Merhaba @Model.Name!
+					</button>
+					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileMenu">
+						<li><a class="dropdown-item" href="/User/MyTripTickets">Biletlerim</a></li>
+						<li><a class="dropdown-item" href="/User/MyHotelReservations">Otel Rezervasyonlarım</a></li>
+						<li><span class="dropdown-item">Puanlarım : 15</span></li>
+						<li><a class="dropdown-item" href="/User/Notifications">Bildirimler</a></li>
+						<li><a class="dropdown-item" href="#">Çıkış</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</nav>

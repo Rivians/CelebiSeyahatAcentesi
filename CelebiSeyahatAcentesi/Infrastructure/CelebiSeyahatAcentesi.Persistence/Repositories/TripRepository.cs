@@ -18,7 +18,13 @@ namespace CelebiSeyahat.Persistence.Repositories
 			_context = context;
 		}
 
-		public async Task<Trip> GetTripWithTicketByIdAsync(string tripId)
+        public async Task<List<Trip>> GetTripListWithAllAsync()
+        {
+            var tripList = await _context.Trips.Include(t => t.TransportationCompany).ToListAsync();
+			return tripList;
+        }
+
+        public async Task<Trip> GetTripWithTicketByIdAsync(string tripId)
 		{
 			var trip = await _context.Trips.Include(t => t.Tickets).Where(t => t.Id == tripId).FirstOrDefaultAsync();
 			return trip;

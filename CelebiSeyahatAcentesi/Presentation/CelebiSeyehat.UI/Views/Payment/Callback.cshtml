@@ -1,0 +1,39 @@
+﻿@using CelebiSeyehat.UI.ViewModels.Payment
+@model PaymentResultViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ödeme Sonucu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container text-center mt-5">
+        @if (Model.IsSuccess)
+        {
+            <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading">Başarılı!</h4>
+                <p>Ödemeniz başarıyla tamamlandı. Rezervasyon bilgileriniz e-posta adresinize gönderildi.</p>
+                <hr>
+                <p class="mb-0">Bizi tercih ettiğiniz için teşekkür ederiz.</p>
+                <a href="/Home/Index" class="btn btn-primary mt-3">Ana Sayfa</a>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading">Hata!</h4>
+                <p>Ödeme işlemi sırasında bir sorun oluştu. Lütfen tekrar deneyiniz veya destek birimimizle iletişime geçiniz.</p>
+                <hr>
+                <p class="mb-0">Hata: @Model.ErrorCode</p>
+                <a href="/Home/Index" class="btn btn-secondary mt-3">Ana Sayfa</a>
+            </div>
+        }
+    </div>
+</body>
+</html>

@@ -21,6 +21,7 @@ namespace CelebiSeyahat.Domain.Entities
         public Trip Trip { get; set; }
         public Customer Customer { get; set; }    // ticket'ı satın alan hesap (null olabilir)
         public Passenger Passenger { get; set; }  // ticket'ın sahibi olan yolcu
+        public Payment Payment { get; set; }
         public TransportationCompany TransportationCompany { get; set; }
     }
 }

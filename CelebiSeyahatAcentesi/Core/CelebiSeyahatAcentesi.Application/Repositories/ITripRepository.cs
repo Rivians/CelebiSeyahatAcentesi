@@ -10,5 +10,6 @@ namespace CelebiSeyahat.Application.Repositories
 	public interface ITripRepository
 	{
 		Task<Trip> GetTripWithTicketByIdAsync(string tripId);
-	}
+        Task<List<Trip>> GetTripListWithAllAsync();
+    }
 }

@@ -2,13 +2,9 @@
 using CelebiSeyahat.Domain.Constants;
 using CelebiSeyahat.Domain.Identity;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace CelebiSeyahat.Infrastructure.Services
 {
@@ -20,14 +16,21 @@ namespace CelebiSeyahat.Infrastructure.Services
             _jwtSettings = jwtSettings;
         }
 
-        public Token GenerateToken(AppUser appUser)
+        public Token GenerateToken(AppUser appUser, IList<string> appRoles)
         {
-            var claims = new[]
+            // Claims koleksiyonunu başlatıyoruz
+            var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, appUser.Id),
                 new Claim(JwtRegisteredClaimNames.Email, appUser.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
+
+            // Rolleri claim olarak ekliyoruz
+            foreach (var role in appRoles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

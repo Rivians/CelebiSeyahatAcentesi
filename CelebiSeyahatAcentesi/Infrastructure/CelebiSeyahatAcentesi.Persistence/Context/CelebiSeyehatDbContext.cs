@@ -4,15 +4,10 @@ using CelebiSeyahat.Persistence.Options;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CelebiSeyahat.Persistence.Context
 {
-    public class CelebiSeyehatDbContext : IdentityDbContext<AppUser, AppRole, string>
+	public class CelebiSeyehatDbContext : IdentityDbContext<AppUser, AppRole, string>
     {
         private readonly DatabaseSettings _databaseSettings;
 
@@ -34,12 +29,12 @@ namespace CelebiSeyahat.Persistence.Context
         }
 
 
-        public DbSet<Basket> Baskets { get; set; }
-        public DbSet<BasketItem> BasketItems { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Hotel> Hotels { get; set; }
         public DbSet<HotelReservation> HotelReservations { get; set; }
-        public DbSet<LoyaltyPoint> LoyaltyPoints { get; set; }
+        public DbSet<HotelFeature> HotelFeatures { get; set; }
+        public DbSet<HotelRoom> HotelRooms { get; set; }
+        public DbSet<RoomType> RoomTypes { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
@@ -53,12 +48,6 @@ namespace CelebiSeyahat.Persistence.Context
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Customer>()
-                .HasOne(c => c.Basket)   // Customer bir Basket'e sahiptir.
-                .WithOne(b => b.Customer)  // Basket bir Customer'a sahiptir.
-                .HasForeignKey<Basket>(b => b.CustomerId) // Basket tablosunda CustomerId foreign key olarak tanımlanmıştır.
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<Customer>()
                 .HasOne(c => c.AppUser)
                 .WithOne(c => c.Customer)
                 .HasForeignKey<Customer>(c => c.AppUserId);
@@ -68,11 +57,6 @@ namespace CelebiSeyahat.Persistence.Context
                 .WithMany(c => c.Payments)
                 .HasForeignKey(p => p.CustomerId)
                 .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Payment>()
-                .HasOne(p => p.Basket)
-                .WithOne(b => b.Payment)
-                .HasForeignKey<Payment>(p => p.BasketId);
 
             modelBuilder.Entity<HotelReservation>()
                 .HasOne(h => h.Customer)
@@ -86,17 +70,18 @@ namespace CelebiSeyahat.Persistence.Context
                 .HasForeignKey(t => t.TransportationCompanyId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<BasketItem>()
-                .HasOne(b => b.Ticket)
-                .WithMany() // tek taraflı ilişki kuruyoruz
-                .HasForeignKey(b => b.TicketId)
-                .OnDelete(DeleteBehavior.Restrict);
+            //modelBuilder.Entity<RoomType>()
+            //    .HasOne(rt => rt.Hotel)
+            //    .WithMany(h => h.RoomTypes)
+            //    .HasForeignKey(rt => rt.HotelId)
+            //    .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<BasketItem>()
-                .HasOne(b => b.HotelReservation)
-                .WithMany() // tek taraflı ilişki kuruyoruz
-                .HasForeignKey(b => b.HotelReservationId)
-                .OnDelete(DeleteBehavior.Restrict);
+            //modelBuilder.Entity<HotelRoom>()
+            //    .HasOne(r => r.RoomType)
+            //    .WithMany(rt => rt.HotelRooms)
+            //    .HasForeignKey(r => r.HotelRoomTypeId)
+            //    .OnDelete(DeleteBehavior.NoAction);
+
         }
 
     }

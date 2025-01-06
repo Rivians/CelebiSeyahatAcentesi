@@ -13,5 +13,6 @@ namespace CelebiSeyehat.Dto.Passenger
 		public string PassengerPhoneNumber { get; set; }
 		public string PassengerTcNo { get; set; }
 		public string PassengerTicketId { get; set; }
-	}
+        public string PassengerGender { get; set; }
+    }
 }

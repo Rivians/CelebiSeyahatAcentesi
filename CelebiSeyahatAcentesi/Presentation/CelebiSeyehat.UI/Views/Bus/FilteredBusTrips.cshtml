@@ -23,7 +23,7 @@
 </head>
 <body>
 	<!-- Navbar -->
-	<nav class="navbar navbar-expand-lg navbar-dark">
+@* 	<nav class="navbar navbar-expand-lg navbar-dark">
 		<div class="container">
 			<a href="/Home/Index" class="navbar-brand fs-1 fw-bold me-4">triply</a>
 			<div class="collapse navbar-collapse" id="navbarNav">
@@ -51,7 +51,9 @@
 
 			</div>
 		</div>
-	</nav>
+	</nav> *@
+	@await Component.InvokeAsync("UserNavbar")
+
 
 
 	<div class="container">

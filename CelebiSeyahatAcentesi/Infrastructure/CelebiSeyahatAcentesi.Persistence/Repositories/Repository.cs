@@ -44,12 +44,22 @@ namespace CelebiSeyahat.Persistence.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task<T> Get(Expression<Func<T, bool>> filter)
+        {
+            return await _context.Set<T>().Where(filter).FirstOrDefaultAsync();
+        }
+
         public async Task<List<T>> GetAllAsync()
         {
             return await _context.Set<T>().ToListAsync();
         }
 
-        public async Task<IQueryable<T>> GetAllQueryableAsync()
+		public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>> filter)
+		{
+			return await _context.Set<T>().Where(filter).ToListAsync();
+		}
+
+		public async Task<IQueryable<T>> GetAllQueryableAsync()
         {
             return _context.Set<T>().AsQueryable();
         }

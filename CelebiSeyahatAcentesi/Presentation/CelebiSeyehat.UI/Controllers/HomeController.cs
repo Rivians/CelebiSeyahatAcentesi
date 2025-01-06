@@ -5,7 +5,6 @@ using System.Diagnostics;
 
 namespace CelebiSeyehat.UI.Controllers
 {
-    [Authorize(Roles = "Admin,User")]
     public class HomeController : Controller
     {
         public IActionResult Index()

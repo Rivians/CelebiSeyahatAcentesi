@@ -13,12 +13,16 @@ namespace CelebiSeyahat.Domain.Entities
         public int Amount { get; set; }
         public DateTime PaymentDate { get; set; }
         public PaymentMethod PaymentMethod { get; set; }
-        public bool IsSuccessful { get; set; }
         public string CustomerId { get; set; }
-        public string BasketId { get; set; }
+		public string TicketId { get; set; }  // Eğer ödeme bilet içinse, TicketId
+		public string HotelReservationId { get; set; }  // Eğer ödeme otel rezervasyonu içinse, HotelReservationId
+		public string TransactionId { get; set; }  // Iyzico işlem kimliği
+		public string ErrorMessage { get; set; }  // Ödeme hatası varsa hata mesajı
+		public PaymentStatus PaymentStatus { get; set; }  // Ödeme durumu (Pending, Completed, Failed)
 
 
-        public Customer Customer { get; set; }
-        public Basket Basket { get; set; }
+		public Customer Customer { get; set; }
+        public Ticket Ticket { get; set; }
+        public HotelReservation HotelReservation { get; set; }
     }
 }

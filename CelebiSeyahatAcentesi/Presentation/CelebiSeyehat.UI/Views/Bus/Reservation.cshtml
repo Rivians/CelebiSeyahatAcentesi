@@ -2,169 +2,208 @@
 @model TransportationReservationViewModel
 
 @{
-    Layout = null;
+	Layout = null;
+
+	var ticketPrice = Model.Trip.TicketPrice * Model.PassengerCount;
 }
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rezervasyon</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Rezervasyon</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/CelebiSeyehat/css/utils.css">
-    <link rel="stylesheet" href="/CelebiSeyehat/css/rezervasyon.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="/CelebiSeyehat/css/utils.css">
+	<link rel="stylesheet" href="/CelebiSeyehat/css/rezervasyon.css">
 
 
 
 
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-            <a href="/Home/Index" class="navbar-brand fs-1 fw-bold me-4">triply</a>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="/Plane/SearchPlaneTrips">Uçak</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Otel</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/Bus/SearchBusTrips">Otobüs</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/Train/SearchTrainTrips">Tren</a></li>
-                </ul>
-                <div>
-                    <div class="dropdown">
-                        <button class="btn btn-outline-light dropdown-toggle " type="button" id="profileMenu" data-bs-toggle="dropdown" aria-expanded="false">
-                            Profil
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileMenu">
-                            <li><a class="dropdown-item" href="#">Biletlerim</a></li>
-                            <li><a class="dropdown-item" href="#">Otel Rezervasyonlarım</a></li>
-                            <li><a class="dropdown-item" href="#">Puanlarım</a></li>
-                            <li><a class="dropdown-item" href="#">Bildirimler</a></li>
-                            <li><a class="dropdown-item" href="#">Çıkış</a></li>
-                        </ul>
-                    </div>
-                </div>
+	<!-- Navbar -->
+@* 	<nav class="navbar navbar-expand-lg navbar-dark">
+		<div class="container">
+			<a href="/Home/Index" class="navbar-brand fs-1 fw-bold me-4">triply</a>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link" href="/Plane/SearchPlaneTrips">Uçak</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Otel</a></li>
+					<li class="nav-item"><a class="nav-link" href="/Bus/SearchBusTrips">Otobüs</a></li>
+					<li class="nav-item"><a class="nav-link" href="/Train/SearchTrainTrips">Tren</a></li>
+				</ul>
+				<div>
+					<div class="dropdown">
+						<button class="btn btn-outline-light dropdown-toggle " type="button" id="profileMenu" data-bs-toggle="dropdown" aria-expanded="false">
+							Profil
+						</button>
+						<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileMenu">
+							<li><a class="dropdown-item" href="#">Biletlerim</a></li>
+							<li><a class="dropdown-item" href="#">Otel Rezervasyonlarım</a></li>
+							<li><a class="dropdown-item" href="#">Puanlarım</a></li>
+							<li><a class="dropdown-item" href="#">Bildirimler</a></li>
+							<li><a class="dropdown-item" href="#">Çıkış</a></li>
+						</ul>
+					</div>
+				</div>
 
-            </div>
-        </div>
-    </nav>
-
-    <div class="container">
-        <div class="row">
-
-            <div class="col-md-9">
-                <!-- İletişim Kartı -->
-                <div class="card">
-                    <div class="card-header">İletişim Bilgileri</div>
-                    <div class="card-body">
-                        <label class="form-label">E-Posta</label>
-                        <input type="email" placeholder="E-posta adresinizi giriniz">
-
-                        <label class="form-label">Cep Telefonu</label>
-                        <input type="tel" placeholder="Cep telefonunuzu giriniz">
-                    </div>
-                </div>
-
-                <!-- Yolcu Bilgileri-->
-                <div class="card">
-                    <div class="card-header">Yolcu Bilgileri</div>
-                    <div class="card-body">
-                        <label class="form-label">Ad *</label>
-                        <input type="text" placeholder="Adınızı giriniz">
-
-                        <label class="form-label">Soyad *</label>
-                        <input type="text" placeholder="Soyadınızı giriniz">
-
-                        <label class="form-label">TC Kimlik No *</label>
-                        <input type="text" placeholder="TC kimlik numaranızı giriniz">
+			</div>
+		</div>
+	</nav> *@
+	@await Component.InvokeAsync("UserNavbar")
 
 
-                        <label class="form-label">Cinsiyet *</label>
+	<div class="container">
 
-                        <label class="tk">
-                            <input type="radio" name="gender" value="male"> Erkek
-                        </label>
-                        <label class="tk">
-                            <input type="radio" name="gender" value="female"> Kadın
-                        </label>
+		<form asp-action="Reservation" asp-controller="Bus" method="post">
 
+			<div class="row">
 
-                    </div>
-                </div>
-            </div>
+				<div class="col-md-9">
 
+					<!-- İletişim Kartı -->
+					<div class="card">
+						<div class="card-header">İletişim Bilgileri</div>
+						<div class="card-body">
+							<label class="form-label">E-Posta</label>
+							<input type="email" asp-for="@Model.AppUser.Email" value="@Model.AppUser.Email" placeholder="E-posta adresinizi giriniz">
 
-            <div class="col-md-3">
-
-                <div class="card">
-                    <div class="card-header">Bilet Bilgileri</div>
-                    <div class="card-body">
-                        <p><strong>Kalkış:</strong> İstanbul</p>
-                        <p><strong>Varış:</strong> İzmir</p>
-                        <p><strong>Firma:</strong> Pamukkale</p>
-                        <p><strong>Tarih:</strong> 20.12.2024</p>
-                        <p><strong>Saat:</strong> 08:30</p>
-                        <p><strong>İptal Koşulları:</strong> Bilet iadesi, kalkış saatinden 24 saat önce yapılabilir.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+							<label class="form-label">Cep Telefonu</label>
+							<input type="tel" asp-for="@Model.AppUser.PhoneNumber" value="@Model.AppUser.PhoneNumber" placeholder="Cep telefonunuzu giriniz">
+						</div>
+					</div>
 
 
-        <div class="row payment-section">
-            <div class="col-md-5 text-start">
-                <h5>Toplam Tutar: 250 TL</h5>
-            </div>
-            <div class="col-md-4 text-end">
-                <button class="btn-proceed">Ödemeye İlerle</button>
-            </div>
-        </div>
-    </div>
+					@for (int i = 0; i < Model.PassengerCount; i++)
+					{
+						<!-- Yolcu Bilgileri-->
+						<div class="card">
+							<div class="card-header">Yolcu Bilgileri - Yolcu : @i+1 </div>
+							<div class="card-body">
+								<label class="form-label">Ad *</label>
+								<input type="text" asp-for="@Model.Passengers[i].PassengerName" placeholder="Adınızı giriniz">
+
+								<label class="form-label">Soyad *</label>
+								<input type="text" asp-for="@Model.Passengers[i].PassengerSurname" placeholder="Soyadınızı giriniz">
+
+								<label class="form-label">TC Kimlik No *</label>
+								<input type="text" asp-for="@Model.Passengers[i].PassengerTcNo" placeholder="TC kimlik numaranızı giriniz">
 
 
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-
-                <div class="col-md-4">
-                    <h4 class="footer-title">triply</h4>
-                    <p>Yolculuklar burada başlar, hatıralar sonsuza kadar sürer...</p>
-                </div>
-
-                <div class="col-md-4">
-                    <h5>Hızlı Linkler</h5>
-                    <ul class="footer-links">
-                        <li><a href="home.html">Ana Sayfa</a></li>
-                        <li><a href="uçak.html">Uçak</a></li>
-                        <li><a href="otel.html">Otel</a></li>
-                        <li><a href="otobüs.html">Otobüs</a></li>
-                        <li><a href="tren.html">Tren</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-md-4">
-                    <h5>Bize Ulaşın</h5>
-                    <ul class="footer-contact">
-                        <li>Email: <a href="mailto:info@triply.com">info@triply.com</a></li>
-                        <li>Telefon: <a href="tel:+902121234567">+90 212 123 45 67</a></li>
-                        <li>
-                            <a href="#"><i class="fab fa-facebook"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="text-center mt-4">
-                <p>&copy; 2024 Triply. Tüm hakları saklıdır.</p>
-            </div>
-        </div>
-    </footer>
+								<label class="form-label">Cinsiyet *</label>
+								<label class="tk">
+									<input type="radio" asp-for="@Model.Passengers[i].PassengerGender" value="Erkek"> Erkek
+								</label>
+								<label class="tk">
+									<input type="radio" asp-for="@Model.Passengers[i].PassengerGender" value="Kadın"> Kadın
+								</label>
+							</div>
+						</div>
+					}
+				</div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="accordion.js"></script>
+				<div class="col-md-3">
+
+					<div class="card">
+						<div class="card-header">Bilet Bilgileri</div>
+						<div class="card-body">
+							<p><strong>Kalkış:</strong> @Model.Trip.Departure</p>
+							<p><strong>Varış:</strong> @Model.Trip.Destination</p>
+							<p><strong>Firma:</strong> @Model.Trip.TransportationCompanyId</p>
+							<p><strong>Tarih:</strong> @Model.Trip.DepartureDate.ToString("dd.MM.yyyy")</p>
+							<p><strong>Saat:</strong> @Model.Trip.DepartureDate.ToString("HH:mm")</p>
+							<p><strong>İptal Koşulları:</strong> Bilet iadesi, kalkış saatinden 24 saat önce yapılabilir.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="row payment-section">
+				<div class="col-md-5 text-start">
+					<h5>Toplam Tutar: @ticketPrice </h5>
+				</div>
+				<div class="col-md-4 text-end">
+					<button type="submit" class="btn-proceed">Ödemeye İlerle</button>
+				</div>
+			</div>
+
+			@* trip bilgiler hidden field ile *@
+			<input type="hidden" asp-for="Trip.Id" value="@Model.Trip.Id">
+			<input type="hidden" asp-for="Trip.Departure" value="@Model.Trip.Departure">
+			<input type="hidden" asp-for="Trip.Destination" value="@Model.Trip.Destination">
+			<input type="hidden" asp-for="Trip.DepartureDate" value="@Model.Trip.DepartureDate">
+			<input type="hidden" asp-for="Trip.ArrivalDate" value="@Model.Trip.ArrivalDate">
+			<input type="hidden" asp-for="Trip.TotalSeats" value="@Model.Trip.TotalSeats">
+			<input type="hidden" asp-for="Trip.AvailableSeats" value="@Model.Trip.AvailableSeats">
+			<input type="hidden" asp-for="Trip.TransportationCompanyId" value="@Model.Trip.TransportationCompanyId">
+			<input type="hidden" asp-for="Trip.TransportationType" value="@Model.Trip.TransportationType">
+			<input type="hidden" asp-for="Trip.CompanyCoverImageUrl" value="@Model.Trip.CompanyCoverImageUrl">
+			<input type="hidden" asp-for="Trip.TicketPrice" value="@Model.Trip.TicketPrice">
+
+			@* appUser bilgileri hidden field ile *@
+			<input type="hidden" asp-for="AppUser.Id" value="@Model.AppUser.Id" />
+			<input type="hidden" asp-for="AppUser.Name" value="@Model.AppUser.Name" />
+			<input type="hidden" asp-for="AppUser.Surname" value="@Model.AppUser.Surname" />
+
+			@* Customer bilgileri hidden field ile *@
+			<input type="hidden" asp-for="AppUser.Customer.Id" value="@Model.AppUser.Customer.Id" />
+			<input type="hidden" asp-for="AppUser.Customer.FirstName" value="@Model.AppUser.Name" />
+			<input type="hidden" asp-for="AppUser.Customer.LastName" value="@Model.AppUser.Surname" />
+			<input type="hidden" asp-for="AppUser.Customer.Email" value="@Model.AppUser.Email" />
+			<input type="hidden" asp-for="AppUser.Customer.PhoneNumber" value="@Model.AppUser.PhoneNumber" />
+
+		</form>
+
+	</div>
+
+
+
+
+	<footer class="footer">
+		<div class="container">
+			<div class="row">
+
+				<div class="col-md-4">
+					<h4 class="footer-title">triply</h4>
+					<p>Yolculuklar burada başlar, hatıralar sonsuza kadar sürer...</p>
+				</div>
+
+				<div class="col-md-4">
+					<h5>Hızlı Linkler</h5>
+					<ul class="footer-links">
+						<li><a href="home.html">Ana Sayfa</a></li>
+						<li><a href="uçak.html">Uçak</a></li>
+						<li><a href="otel.html">Otel</a></li>
+						<li><a href="otobüs.html">Otobüs</a></li>
+						<li><a href="tren.html">Tren</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-4">
+					<h5>Bize Ulaşın</h5>
+					<ul class="footer-contact">
+						<li>Email: <a href="mailto:info@triply.com">info@triply.com</a></li>
+						<li>Telefon: <a href="tel:+902121234567">+90 212 123 45 67</a></li>
+						<li>
+							<a href="#"><i class="fab fa-facebook"></i></a>
+							<a href="#"><i class="fab fa-instagram"></i></a>
+							<a href="#"><i class="fab fa-twitter"></i></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="text-center mt-4">
+				<p>&copy; 2024 Triply. Tüm hakları saklıdır.</p>
+			</div>
+		</div>
+	</footer>
+
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="/CelebiSeyehat/js/accordion.js"></script>
 </body>
 </html>

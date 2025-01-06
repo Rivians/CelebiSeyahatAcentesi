@@ -11,5 +11,6 @@ namespace CelebiSeyahat.Application.Services
     {
         Task<List<Trip>> GetFilteredTripsAsync(string fromCity, string toCity, DateTime date, int passengerCount, int transportationType);
         Task<Trip> GetTripWithTicketsByIdAsync(string id);
+        Task<List<Trip>> GetTripListWithAllAsync();
     }
 }

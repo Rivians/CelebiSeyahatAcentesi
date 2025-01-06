@@ -5,6 +5,7 @@ using CelebiSeyahat.Application.Features.AuthFeatures.Commands.Register;
 using CelebiSeyahat.Application.Services;
 using CelebiSeyahat.Domain.Entities;
 using CelebiSeyahat.Domain.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -76,7 +77,8 @@ namespace CelebiSeyahat.Persistence.Services
             var result = await _userManager.CheckPasswordAsync(user, loginCommand.Password);
             if (result)
             {
-                var token = _tokenService.GenerateToken(user);
+                var roles = await _userManager.GetRolesAsync(user);
+                var token = _tokenService.GenerateToken(user, roles);
                 LoginCommandResponse response = _mapper.Map<LoginCommandResponse>(token);
                 return response;
             }
@@ -101,6 +103,7 @@ namespace CelebiSeyahat.Persistence.Services
                 AppUserId = appUser.Id  // yukarıda appUser olusturuldugu için ID'si de var oluyor.
             };
 
+            await _userManager.AddToRoleAsync(appUser, "User");
             await _repository.AddAsync(customer);
         }
 

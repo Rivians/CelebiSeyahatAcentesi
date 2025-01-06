@@ -66,7 +66,13 @@ namespace CelebiSeyahat.Persistence.Services
             //return await query.ToListAsync();
         }
 
-		public async Task<Trip> GetTripWithTicketsByIdAsync(string id)
+        public async Task<List<Trip>> GetTripListWithAllAsync()
+        {
+            var tripList = await _tripRepository.GetTripListWithAllAsync();
+            return tripList;
+        }
+
+        public async Task<Trip> GetTripWithTicketsByIdAsync(string id)
 		{
             var trip = await _tripRepository.GetTripWithTicketByIdAsync(id);
             return trip;

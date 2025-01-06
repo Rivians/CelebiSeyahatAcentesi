@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\CelebiSeyehat.Dto\CelebiSeyehat.Dto.csproj" />
     <ProjectReference Include="..\CelebiSeyehatAcentesi.Domain\CelebiSeyahat.Domain.csproj" />
   </ItemGroup>
 

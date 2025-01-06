@@ -11,6 +11,6 @@ namespace CelebiSeyahat.Application.Abstractions
 {
     public interface ITokenService
     {
-        Token GenerateToken(AppUser appUser);
+        Token GenerateToken(AppUser appUser, IList<string> roles);
     }
 }

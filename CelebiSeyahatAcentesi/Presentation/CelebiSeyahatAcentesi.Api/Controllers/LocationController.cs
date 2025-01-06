@@ -1,10 +1,14 @@
 ﻿using CelebiSeyahat.Application.Features.LocationFeatures.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CelebiSeyahat.Api.Controllers
 {
+    [Authorize(AuthenticationSchemes = "Bearer")]
+    [Authorize(Roles = "Admin,User")]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class LocationController : ControllerBase

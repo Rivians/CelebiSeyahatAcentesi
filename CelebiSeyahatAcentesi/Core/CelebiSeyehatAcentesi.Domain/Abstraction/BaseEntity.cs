@@ -16,7 +16,7 @@ namespace CelebiSeyahat.Domain.Abstraction
 
         [Key]
         public string Id { get; set; }
-        public DateTime? CreatedTime { get; set; }
+        public DateTime? CreatedTime { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedTime { get; set; }
     }
 }
