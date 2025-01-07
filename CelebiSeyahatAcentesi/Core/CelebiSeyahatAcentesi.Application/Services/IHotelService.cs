@@ -10,6 +10,8 @@ namespace CelebiSeyahat.Application.Services
         Task<List<string>> GetHotelNamesForAjax(string term);
 
         Task<List<string>> GetHotelNamesAsync();
-    }
+
+        Task<Hotel> GetHotelByIdAsync(string id);
+	}
 
 }

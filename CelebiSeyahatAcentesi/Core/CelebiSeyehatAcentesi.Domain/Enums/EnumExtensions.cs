@@ -19,5 +19,24 @@ namespace CelebiSeyahat.Domain.Enums
             // enum açıklaması boşsa enum değerini dön, eğer açıklama doluysa enum açıklamasını dön
             return descriptionAttribute == null ? value.ToString() : descriptionAttribute.Description;  
         }
-    }
+
+        public static List<string> GetEnumDescriptions<T>() where T : Enum
+        {
+			return Enum.GetValues(typeof(T)).Cast<T>().Select(v => v.ToString()).ToList();
+		}
+
+		private static string GetEnumDescription<T>(T value) where T : Enum
+		{
+			FieldInfo fi = value.GetType().GetField(value.ToString());
+			DescriptionAttribute[] attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+			if (attributes != null && attributes.Length > 0)
+				return attributes[0].Description;
+			else
+				return value.ToString();
+		}
+	}
 }
+
+	
+

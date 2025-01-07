@@ -17,8 +17,8 @@ namespace CelebiSeyahat.Api.Controllers
         }
 
 
-        [HttpGet("GetFilteredHotels")]
-        public async Task<IActionResult> GetFilteredHotels([FromQuery] GetFilteredHotelsQuery query)
+        [HttpPost("GetFilteredHotels")]
+        public async Task<IActionResult> GetFilteredHotels([FromBody] GetFilteredHotelsQuery query)
         {
             if (string.IsNullOrEmpty(query.ToString())) { return BadRequest("The term field is required."); }
 
@@ -62,15 +62,51 @@ namespace CelebiSeyahat.Api.Controllers
             }
         }
 
-        //[HttpGet("GetHotelNamesTest")]
-        //public IActionResult GetHotelNames(string query)
-        //{
-        //    var hotelNames = new List<string> { "Otel A", "Otel B", "Otel C", "Otel D" };
-        //    var filteredHotels = hotelNames
-        //        .Where(h => h.Contains(query, StringComparison.OrdinalIgnoreCase))
-        //        .ToList();
-        //    return Ok(filteredHotels);
-        //}
+		[HttpGet("GetHotelFeatures")]
+		public async Task<IActionResult> GetHotelFeatures()
+		{
+			var query = new GetHotelFeaturesQuery();
+			var hotelFeatures = await _mediator.Send(query);
+			if (hotelFeatures != null)
+			{
+				return Ok(hotelFeatures);
+			}
+			else
+			{
+				return BadRequest();
+			}
+		}
 
-    }
+		[HttpGet("GetHotelPensionTypes")]
+		public async Task<IActionResult> GetHotelPensionTypes()
+		{
+			var query = new GetHotelPensionTypesQuery();
+			var pensionTypes = await _mediator.Send(query);
+
+			if (pensionTypes != null)
+			{
+				return Ok(pensionTypes);
+			}
+			else
+			{
+				return BadRequest();
+			}
+		}
+
+		[HttpGet("GetHotelById/{id}")]
+        public async Task<IActionResult> GetHotelById(string id)
+        {
+            var query = new GetHotelByIdQuery(id);
+            var response = await _mediator.Send(query);
+            if(response != null)
+            {
+                return Ok(response);
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
+	}
 }

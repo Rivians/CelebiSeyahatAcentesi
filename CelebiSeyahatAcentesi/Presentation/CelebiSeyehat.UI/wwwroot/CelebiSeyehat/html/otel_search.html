@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arama</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/utils.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/otel_search.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a href="home.html" class="navbar-brand fs-1 fw-bold me-4">triply</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="uçak.html">Uçak</a></li>
+                    <li class="nav-item"><a class="nav-link" href="otel.html">Otel</a></li>
+                    <li class="nav-item"><a class="nav-link" href="otobüs.html">Otobüs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="tren.html">Tren</a></li>
+                </ul>
+               
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="row">
+            <!-- Filtreleme -->
+            <aside class="filters col-md-3">
+                <h3>Filtreler</h3>
+            
+                <!-- Lokasyon -->
+                <a href="#" class="accordion filter-group">Lokasyon</a>
+                <div class="panel">
+                    <label class="tk"><input type="radio" name="location" value="İstanbul"> İstanbul</label>
+                    <label class="tk"><input type="radio" name="location" value="İzmir"> İzmir</label>
+                    <label class="tk"><input type="radio" name="location" value="Çanakkale"> Çanakkale</label>
+                    <label class="tk"><input type="radio" name="location" value="Kocaeli"> Kocaeli</label>
+                    <label class="tk"><input type="radio" name="location" value="Bandırma"> Bandırma</label>
+                </div>
+            
+                <!-- Konuk Değerlendirmesi -->
+                <a href="#" class="accordion filter-group">Konuk Değerlendirmesi</a>
+                <div class="panel">
+                    <label class="tk"><input type="radio" name="rating" value="9+"> Mükemmel (9 ve üzeri)</label>
+                    <label class="tk"><input type="radio" name="rating" value="8+"> Çok iyi (8 ve üzeri)</label>
+                    <label class="tk"><input type="radio" name="rating" value="7+"> İyi (7 ve üzeri)</label>
+                    <label class="tk"><input type="radio" name="rating" value="6+"> Keyifli (6 ve üzeri)</label>
+                </div>
+            
+                <!-- Özellikler -->
+                <a href="#" class="accordion filter-group">Özellikler</a>
+                <div class="panel">
+                    <label class="tk"><input type="checkbox" name="features" value="Spa Merkezi"> Spa Merkezi</label>
+                    <label class="tk"><input type="checkbox" name="features" value="Wi-Fi"> Wi-Fi</label>
+                    <label class="tk"><input type="checkbox" name="features" value="Engelli Odaları"> Engelli Odaları</label>
+                    <label class="tk"><input type="checkbox" name="features" value="Şehir Merkezine Uzaklık"> Şehir Merkezine Uzaklık</label>
+                    <label class="tk"><input type="checkbox" name="features" value="Açık Havuz"> Açık Havuz</label>
+                    <label class="tk"><input type="checkbox" name="features" value="Kapalı Havuz"> Kapalı Havuz</label>
+                    <label class="tk"><input type="checkbox" name="features" value="Spor Salonu"> Spor Salonu</label>
+                </div>
+            
+                <!-- Fiyat Aralığı -->
+                <a href="#" class="accordion filter-group">Fiyat Aralığı</a>
+                <div class="panel">
+                    <div class="price-range">
+                        <div class="price-inputs">
+                            <label for="min-price">Min:</label>
+                            <input type="number" id="min-price" name="min-price" min="100" max="10000" value="100">
+                        </div>
+                        <div class="price-inputs">
+                            <label for="max-price">Max:</label>
+                            <input type="number" id="max-price" name="max-price" min="100" max="10000" value="1000">
+                        </div>
+                    </div>
+                </div>
+                <!-- Pansiyon Türü -->
+                <a href="#" class="accordion filter-group">Pansiyon Türü</a>
+                <div class="panel">
+                    <label class="tk"><input type="radio" name="board-type" value="Alkolsüz Her Şey Dahil"> Alkolsüz Her Şey Dahil</label>
+                    <label class="tk"><input type="radio" name="board-type" value="Basit Kahvaltı"> Basit Kahvaltı</label>
+                    <label class="tk"><input type="radio" name="board-type" value="Ultra Her Şey Dahil"> Ultra Her Şey Dahil</label>
+                    <label class="tk"><input type="radio" name="board-type" value="Her Şey Dahil"> Her Şey Dahil</label>
+                    <label class="tk"><input type="radio" name="board-type" value="Tam Pansiyon"> Tam Pansiyon</label>
+                </div>
+                <div class="filter-actions">
+                    <button type="submit" class="btn btn-primary apply-filters">Filtreleri Uygula</button>
+                </div>
+            </aside>
+
+
+            <!-- Otel Kartları -->
+            <main class="tickets col-md-9">
+                <h2>Uygun Oteller</h2>
+
+                <div class="ticket-card">
+                    <div class="column image">
+                        <img src="img/otel1.jpg" alt="">
+                    </div>
+                    <div class="column firm">
+                        <h3>Arkem Hotel</h3>
+                        <p>Maltepe, İstanbul</p>
+                        <p>Her Şey Dahil</p>
+                    </div>
+                    <div class="column button">
+                        <div class="rating-info">
+                            <div class="rating">
+                                <p class="review-count">(120 yorum)</p>
+                                <p class="rating-score">8.5</p>
+                                
+                            </div>
+                        </div>
+                        <div class="price-info">
+                            <p class="price">800 TL</p>
+                            <a href="rezervasyon.html"><button>Seç</button></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ticket-card">
+                    <div class="column image">
+                        <img src="img/otel2.jpg" alt="">
+                    </div>
+                    <div class="column firm">
+                        <h3>Royal Wings Hotel</h3>
+                        <p>Maltepe, İstanbul</p>
+                        <p>Her Şey Dahil</p>
+                    </div>
+                    <div class="column button">
+                        <div class="rating-info">
+                            <div class="rating">
+                                <p class="review-count">(98 yorum)</p>
+                                <p class="rating-score">7.4</p>
+                                
+                            </div>
+                        </div>
+                        <div class="price-info">
+                            
+                            <p class="price">500 TL</p>
+                            <a href="rezervasyon.html"><button>Seç</button></a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h4 class="footer-title">triply</h4>
+                    <p>Yolculuklar burada başlar, hatıralar sonsuza kadar sürer...</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Hızlı Linkler</h5>
+                    <ul class="footer-links">
+                        <li><a href="home.html">Ana Sayfa</a></li>
+                        <li><a href="uçak.html">Uçak</a></li>
+                        <li><a href="otel.html">Otel</a></li>
+                        <li><a href="otobüs.html">Otobüs</a></li>
+                        <li><a href="tren.html">Tren</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Bize Ulaşın</h5>
+                    <ul class="footer-contact">
+                        <li>Email: <a href="mailto:info@triply.com">info@triply.com</a></li>
+                        <li>Telefon: <a href="tel:+902121234567">+90 212 123 45 67</a></li>
+                        <li>
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <p>&copy; 2024 Triply. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="accordion.js"></script>
+</body>
+</html>

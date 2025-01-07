@@ -17,41 +17,9 @@
 	<link rel="stylesheet" href="/CelebiSeyehat/css/style.css">
 	<link rel="stylesheet" href="/CelebiSeyehat/css/search.css">
 
-
-
-
 </head>
 <body>
-	<!-- Navbar -->
-@* 	<nav class="navbar navbar-expand-lg navbar-dark">
-		<div class="container">
-			<a href="/Home/Index" class="navbar-brand fs-1 fw-bold me-4">triply</a>
-			<div class="collapse navbar-collapse" id="navbarNav">
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link" href="/Plane/SearchPlaneTrips">Uçak</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Otel</a></li>
-					<li class="nav-item"><a class="nav-link" href="/Bus/SearchBusTrips">Otobüs</a></li>
-					<li class="nav-item"><a class="nav-link" href="/Train/SearchTrainTrips">Tren</a></li>
-				</ul>
-				<div>
-					<div class="dropdown">
-						<button class="btn btn-outline-light dropdown-toggle " type="button" id="profileMenu" data-bs-toggle="dropdown" aria-expanded="false">
-							Profil
-						</button>
-						<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileMenu">
-							<li><a class="dropdown-item" href="#">Biletlerim</a></li>
-							<li><a class="dropdown-item" href="#">Otel Rezervasyonlarım</a></li>
-							<li><a class="dropdown-item" href="#">Puanlarım</a></li>
-							<li><a class="dropdown-item" href="#">Bildirimler</a></li>
-							<li><a class="dropdown-item" href="#">Çıkış</a></li>
-						</ul>
-					</div>
-				</div>
 
-
-			</div>
-		</div>
-	</nav> *@
 	@await Component.InvokeAsync("UserNavbar")
 
 
@@ -63,7 +31,7 @@
 				<h3>Filtreler</h3>
 
 
-				<button class="accordion filter-group">Kalkış Saati</button>
+				<a href="#" class="accordion filter-group">Kalkış Saati</a>
 				<div class="panel">
 					<label class="tk"><input type="checkbox"> Gece</label>
 					<label class="tk"><input type="checkbox"> Sabah</label>
@@ -71,7 +39,7 @@
 					<label class="tk"><input type="checkbox"> Akşam</label>
 				</div>
 
-				<button class="accordion filter-group">Oturma Düzeni</button>
+				<a href="#" class="accordion filter-group">Oturma Düzeni</a>
 				<div class="panel">
 					<label class="tk"><input type="checkbox"> 1+1 Koltuk</label>
 					<label class="tk"><input type="checkbox"> 2+1 Koltuk</label>
@@ -79,7 +47,7 @@
 
 				</div>
 
-				<button class="accordion filter-group">Firma</button>
+				<a href="#" class="accordion filter-group">Firma</a>
 				<div class="panel">
 					<label class="tk"><input type="checkbox"> Pamukkale</label>
 					<label class="tk"><input type="checkbox"> Nilüfer</label>
@@ -87,16 +55,21 @@
 					<label class="tk"><input type="checkbox"> Kamil Koç</label>
 				</div>
 
-				<button class="accordion filter-group">Fiyat Aralığı</button>
+				<a href="#" class="accordion filter-group">Fiyat Aralığı</a>
 				<div class="panel">
 					<div class="price-range">
-						<p>100tl</p>
-						<input type="range" min="100" max="1000">
-						<p>1000tl</p>
+						<div class="price-inputs">
+							<label for="min-price">Min:</label>
+							<input type="number" id="min-price" name="min-price" min="100" max="10000" value="100">
+						</div>
+						<div class="price-inputs">
+							<label for="max-price">Max:</label>
+							<input type="number" id="max-price" name="max-price" min="100" max="10000" value="1000">
+						</div>
 					</div>
 				</div>
 
-				<button class="accordion filter-group">Kalkış Yeri</button>
+				<a href="#" class="accordion filter-group">Kalkış Yeri</a>
 				<div class="panel">
 					<label class="tk"><input type="checkbox"> İstanbul</label>
 					<label class="tk"><input type="checkbox"> İzmir</label>
@@ -105,13 +78,16 @@
 					<label class="tk"><input type="checkbox"> Bandırma</label>
 				</div>
 
-				<button class="accordion filter-group">Varış Yeri</button>
+				<a href="#" class="accordion filter-group">Varış Yeri</a>
 				<div class="panel">
 					<label class="tk"><input type="checkbox"> İstanbul</label>
 					<label class="tk"><input type="checkbox"> İzmir</label>
 					<label class="tk"><input type="checkbox"> Çanakkale</label>
 					<label class="tk"><input type="checkbox"> Kocaeli</label>
 					<label class="tk"><input type="checkbox"> Bandırma</label>
+				</div>
+				<div class="filter-actions">
+					<button type="submit" class="btn btn-primary apply-filters">Filtreleri Uygula</button>
 				</div>
 
 			</aside>

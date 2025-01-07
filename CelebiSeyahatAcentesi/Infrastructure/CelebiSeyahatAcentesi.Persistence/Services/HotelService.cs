@@ -21,7 +21,13 @@ namespace CelebiSeyahat.Persistence.Services
             _repository = repository;
         }
 
-        public async Task<List<Hotel>> GetHotelListByFilterAsync(string location, DateTime? checkInDate, DateTime? checkOutDate, int? guestCount, string? hotelName, List<string>? features, int? minPrice, int? maxPrice, int? minRating, int? maxRating, PensionType? pensionType)
+		public async Task<Hotel> GetHotelByIdAsync(string id)
+		{
+            var hotel = await _hotelRepository.GetHotelByIdAsync(id);
+			return hotel;
+		}
+
+		public async Task<List<Hotel>> GetHotelListByFilterAsync(string location, DateTime? checkInDate, DateTime? checkOutDate, int? guestCount, string? hotelName, List<string>? features, int? minPrice, int? maxPrice, int? minRating, int? maxRating, PensionType? pensionType)
         {
             var hotelList = await _hotelRepository.GetHotelListByFilterAsync(location, checkInDate, checkOutDate, guestCount, hotelName, features, minPrice, maxPrice, minRating, maxRating, pensionType);
 

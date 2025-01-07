@@ -11,5 +11,7 @@ namespace CelebiSeyahat.Application.Repositories
     public interface IHotelRepository
     {
         Task<List<Hotel>> GetHotelListByFilterAsync(string location, DateTime? checkInDate, DateTime? checkOutDate, int? guestCount, string hotelName, List<string> features, int? minPrice, int? maxPrice, int? minRating, int? maxRating, PensionType? pensionType);
+
+        Task<Hotel> GetHotelByIdAsync(string hotelId);
     }
 }

@@ -1,251 +1,201 @@
-﻿@using Newtonsoft.Json
+﻿@using CelebiSeyehat.UI.ViewModels.Hotel
+@using Newtonsoft.Json
+
+@model PostHotelFilterViewModel
+
 @{
-    Layout = null;
-    var hotelNames = ViewBag.HotelNames as List<string>;
+	Layout = null;
+	// var hotelNames = ViewBag.HotelNames as List<string>;
 }
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Triply</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/CelebiSeyehat/css/utils.css">
-    <link rel="stylesheet" href="/CelebiSeyehat/css/home.css">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <style>
-        .dropdown-menu {
-            position: absolute;
-            border: 1px solid #ddd;
-            background: #fff;
-            width: 100%;
-            display: none;
-            z-index: 1000;
-            max-height: 200px;
-            overflow-y: auto;
-        }
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Triply</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="/CelebiSeyehat/css/utils.css">
+	<link rel="stylesheet" href="/CelebiSeyehat/css/home.css">
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	<style>
+		.dropdown-menu {
+			position: absolute;
+			border: 1px solid #ddd;
+			background: #fff;
+			width: 100%;
+			display: none;
+			z-index: 1000;
+			max-height: 200px;
+			overflow-y: auto;
+		}
 
-        .dropdown-item {
-            padding: 8px 12px;
-            cursor: pointer;
-        }
+		.dropdown-item {
+			padding: 8px 12px;
+			cursor: pointer;
+		}
 
-            .dropdown-item:hover {
-                background-color: #f0f0f0;
-            }
-    </style>
+			.dropdown-item:hover {
+				background-color: #f0f0f0;
+			}
+
+
+
+	</style>
 </head>
 <body>
-    <header style="background-image: url('/CelebiSeyehat/img/otel.jpg'); background-size: cover; background-repeat: no-repeat;">
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark">
-            <div class="container">
-                <a href="home.html" class="navbar-brand fs-1 fw-bold me-4">triply</a>
+	<header style="background-image: url('/CelebiSeyehat/img/otel.jpg'); background-size: cover; background-repeat: no-repeat;">
+		<!-- Navbar -->
+		@* <nav class="navbar navbar-expand-lg navbar-dark">
+		<div class="container">
+		<a href="home.html" class="navbar-brand fs-1 fw-bold me-4">triply</a>
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="uçak.html">Uçak</a></li>
-                        <li class="nav-item"><a class="nav-link" href="otel.html">Otel</a></li>
-                        <li class="nav-item"><a class="nav-link" href="otobüs.html">Otobüs</a></li>
-                        <li class="nav-item"><a class="nav-link" href="tren.html">Tren</a></li>
-                    </ul>
-                    <div>
-                        <a href="login.html" class="btn btn-outline-light">Giriş Yap</a>
-                    </div>
-                </div>
-            </div>
-        </nav>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+		<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+		<li class="nav-item"><a class="nav-link" href="uçak.html">Uçak</a></li>
+		<li class="nav-item"><a class="nav-link" href="otel.html">Otel</a></li>
+		<li class="nav-item"><a class="nav-link" href="otobüs.html">Otobüs</a></li>
+		<li class="nav-item"><a class="nav-link" href="tren.html">Tren</a></li>
+		</ul>
+		<div>
+		<a href="login.html" class="btn btn-outline-light">Giriş Yap</a>
+		</div>
+		</div>
+		</div>
+		</nav> *@
+		@await Component.InvokeAsync("UserNavbar")
 
-        <!-- Search Card -->
-        <div class="container position-absolute top-50 start-50 translate-middle">
-            <h1 class="text-center text-white overlay-text">Nereye gitmek istersin?</h1><br>
-            <div id="searchCard" class="row search-card">
-                <div class="col-md-3 mb-3">
-                    <label for="konum">Konum</label><br>
-                    <select class="form-select">
-                        <option value="">Şehir seçiniz</option>
-                        @foreach (var city in ViewBag.Locations)
-                        {
-                            <option value="@city.Name">@city.Name</option>
-                        }
-                    </select>
-                </div>
-                <div class="col-md-3 mb-3 position-relative">
-                    <label for="otel">Otel</label><br>
-                    <input type="text" id="otelInput" class="form-control" placeholder="Örn: Hilton Otel">
-                    <div id="otelDropdown" class="dropdown-menu"></div>
-                </div>
-                <div class="col-md-2 mb-3">
-                    <label for="girisTarihi" class="form-label">Giriş Tarihi</label>
-                    <input type="date" id="girisTarihi" class="form-control">
-                </div>
-                <div class="col-md-2 mb-3">
-                    <label for="cikisTarihi" class="form-label">Çıkış Tarihi</label>
-                    <input type="date" id="cikisTarihi" class="form-control">
-                </div>
-                <div class="col-md-1 mb-3">
-                    <label for="yolcuSayisi" class="form-label">Ziyaretçi Sayısı</label>
-                    <select id="yolcuSayisi" class="form-select">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                    </select>
-                </div>
-                <div class="col-md-1 d-flex align-items-center">
-                    <button class="btn btn-primary w-100">Otel Bul</button>
-                </div>
-            </div>
-        </div>
-    </header>
+		<!-- Search Card -->
+		<div class="container position-absolute top-50 start-50 translate-middle">
+			<h1 class="text-center text-white overlay-text">Tatil mi istiyorsun?</h1><br>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <!-- Logo -->
-                <div class="col-md-4">
-                    <h4 class="footer-title">triply</h4>
-                    <p>Yolculuklar burada başlar, hatıralar sonsuza kadar sürer...</p>
-                </div>
+			<form asp-action="SearchHotel" method="post">
 
-                <div class="col-md-4">
-                    <h5>Hızlı Linkler</h5>
-                    <ul class="footer-links">
-                        <li><a href="home.html">Ana Sayfa</a></li>
-                        <li><a href="uçak.html">Uçak</a></li>
-                        <li><a href="otel.html">Otel</a></li>
-                        <li><a href="otobüs.html">Otobüs</a></li>
-                        <li><a href="tren.html">Tren</a></li>
-                    </ul>
-                </div>
-                <!-- Sosyal Medya ve İletişim -->
-                <div class="col-md-4">
-                    <h5>Bize Ulaşın</h5>
-                    <ul class="footer-contact">
-                        <li>Email: <a href="mailto:info@triply.com">info@triply.com</a></li>
-                        <li>Telefon: <a href="tel:+902121234567">+90 212 123 45 67</a></li>
-                        <li>
-                            <a href="#"><i class="fab fa-facebook"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="text-center mt-4">
-                <p>&copy; 2024 Triply. Tüm hakları saklıdır.</p>
-            </div>
-        </div>
-    </footer>
+				<div id="searchCard" class="row search-card">
+					<div class="col-md-3 mb-3">
+						<label for="konum">Konum</label><br>
+						<select asp-for="Location" class="form-select">
+							<option value="">Şehir seçiniz</option>
+							@foreach (var location in ViewBag.Locations)
+							{
+								<option value="@location.Name">@location.Name</option>
+							}
+						</select>
+					</div>
+					<div class="col-md-3 mb-3 position-relative">
+						<label for="otel">Otel</label><br>
+						<input type="text" asp-for="HotelName" id="otelInput" class="form-control" placeholder="Örn: Hilton Otel">
+						<div id="otelDropdown" class="dropdown-menu"></div>
+					</div>
+					<div class="col-md-2 mb-3">
+						<label for="girisTarihi" class="form-label">Giriş Tarihi</label>
+						<input type="date" asp-for="CheckInDate" id="girisTarihi" class="form-control">
+					</div>
+					<div class="col-md-2 mb-3">
+						<label for="cikisTarihi" class="form-label">Çıkış Tarihi</label>
+						<input type="date" asp-for="CheckOutDate" id="cikisTarihi" class="form-control">
+					</div>
+					<div class="col-md-1 mb-3">
+						<label for="yolcuSayisi" class="form-label">Ziyaretçi Sayısı</label>
+						<select id="yolcuSayisi" asp-for="GuestCount" class="form-select">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+						</select>
+					</div>
+					<div class="col-md-1 d-flex align-items-center">
+						<button type="submit" class="btn btn-primary w-100">Otel Bul</button>
+					</div>
+				</div>
 
-    <script>
-
-        // $(document).ready(function () {
-        //     const hotelNames = @Html.Raw(JsonConvert.SerializeObject(ViewBag.HotelNames));
-        //     const locationNames = @Html.Raw(JsonConvert.SerializeObject(ViewBag.LocationNames));
-
-        //     const $otelInput = $("#otelInput");
-        //     const $otelDropdown = $("#otelDropdown");
-
-        //     const $konumInput = $("#konumInput");
-        //     const $konumDropdown = $("#konumDropdown");
-
-        //     // Otel input alanı için dinamik arama ve dropdown
-        //     $otelInput.on("input", function () {
-        //         const query = $(this).val().trim().toLowerCase();
-        //         const filtered = hotelNames.filter(h => h.toLowerCase().includes(query));
-
-        //         $otelDropdown.empty();
-        //         if (filtered.length > 0) {
-        //             filtered.forEach(name => {
-        //                 const item = $(`<div class="dropdown-item">${name}</div>`);
-        //                 item.on("click", function () {
-        //                     $otelInput.val(name);
-        //                     $otelDropdown.hide();
-        //                 });
-        //                 $otelDropdown.append(item);
-        //             });
-        //             $otelDropdown.show();
-        //         } else {
-        //             $otelDropdown.hide();
-        //         }
-        //     });
-
-        //     // Konum input alanı için dinamik arama ve dropdown
-        //     $konumInput.on("input", function () {
-        //         const query = $(this).val().trim().toLowerCase();
-        //         const filtered = locationNames.filter(l => l.toLowerCase().includes(query));
-
-        //         $konumDropdown.empty();
-        //         if (filtered.length > 0) {
-        //             filtered.forEach(name => {
-        //                 const item = $(`<div class="dropdown-item">${name}</div>`);
-        //                 item.on("click", function () {
-        //                     $konumInput.val(name);
-        //                     $konumDropdown.hide();
-        //                 });
-        //                 $konumDropdown.append(item);
-        //             });
-        //             $konumDropdown.show();
-        //         } else {
-        //             $konumDropdown.hide();
-        //         }
-        //     });
-
-        //     $(document).on("click", function (event) {
-        //         if (!$otelInput.is(event.target) && !$otelDropdown.is(event.target)) {
-        //             $otelDropdown.hide();
-        //         }
-        //         if (!$konumInput.is(event.target) && !$konumDropdown.is(event.target)) {
-        //             $konumDropdown.hide();
-        //         }
-        //     });
-        // });
+			</form>
 
 
+		</div>
+	</header>
 
+	<!-- Footer -->
+	<footer class="footer">
+		<div class="container">
+			<div class="row">
+				<!-- Logo -->
+				<div class="col-md-4">
+					<h4 class="footer-title">triply</h4>
+					<p>Yolculuklar burada başlar, hatıralar sonsuza kadar sürer...</p>
+				</div>
 
+				<div class="col-md-4">
+					<h5>Hızlı Linkler</h5>
+					<ul class="footer-links">
+						<li><a href="home.html">Ana Sayfa</a></li>
+						<li><a href="uçak.html">Uçak</a></li>
+						<li><a href="otel.html">Otel</a></li>
+						<li><a href="otobüs.html">Otobüs</a></li>
+						<li><a href="tren.html">Tren</a></li>
+					</ul>
+				</div>
+				<!-- Sosyal Medya ve İletişim -->
+				<div class="col-md-4">
+					<h5>Bize Ulaşın</h5>
+					<ul class="footer-contact">
+						<li>Email: <a href="mailto:info@triply.com">info@triply.com</a></li>
+						<li>Telefon: <a href="tel:+902121234567">+90 212 123 45 67</a></li>
+						<li>
+							<a href="#"><i class="fab fa-facebook"></i></a>
+							<a href="#"><i class="fab fa-instagram"></i></a>
+							<a href="#"><i class="fab fa-twitter"></i></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="text-center mt-4">
+				<p>&copy; 2024 Triply. Tüm hakları saklıdır.</p>
+			</div>
+		</div>
+	</footer>
 
+	<script>
 
+		// $(document).ready(function () {
+		// 	const testHotels = @Html.Raw(JsonConvert.SerializeObject(ViewBag.HotelNames));
+		// 	const $otelInput = $("#otelInput");
+		// 	const $dropdown = $("#otelDropdown");
 
-        $(document).ready(function () {
-            const testHotels = @Html.Raw(JsonConvert.SerializeObject(ViewBag.HotelNames));
-            const $otelInput = $("#otelInput");
-            const $dropdown = $("#otelDropdown");
+		// 	$otelInput.on("input", function () {
+		// 		const query = $(this).val().trim().toLowerCase();
+		// 		const filtered = testHotels.filter(h => h.toLowerCase().includes(query));
 
-            $otelInput.on("input", function () {
-                const query = $(this).val().trim().toLowerCase();
-                const filtered = testHotels.filter(h => h.toLowerCase().includes(query));
+		// 		$dropdown.empty();
+		// 		if (filtered.length > 0) {
+		// 			filtered.forEach(name => {
+		// 				const item = $(`<div class="dropdown-item">${name}</div>`);
+		// 				item.on("click", function () {
+		// 					$otelInput.val(name);
+		// 					$dropdown.hide();
+		// 				});
+		// 				$dropdown.append(item);
+		// 			});
+		// 			$dropdown.show();
+		// 		} else {
+		// 			$dropdown.hide();
+		// 		}
+		// 	});
 
-                $dropdown.empty();
-                if (filtered.length > 0) {
-                    filtered.forEach(name => {
-                        const item = $(`<div class="dropdown-item">${name}</div>`);
-                        item.on("click", function () {
-                            $otelInput.val(name);
-                            $dropdown.hide();
-                        });
-                        $dropdown.append(item);
-                    });
-                    $dropdown.show();
-                } else {
-                    $dropdown.hide();
-                }
-            });
+		// 	$(document).on("click", function (event) {
+		// 		if (!$otelInput.is(event.target) && !$dropdown.is(event.target)) {
+		// 			$dropdown.hide();
+		// 		}
+		// 	});
+		// });
+	</script>
 
-            $(document).on("click", function (event) {
-                if (!$otelInput.is(event.target) && !$dropdown.is(event.target)) {
-                    $dropdown.hide();
-                }
-            });
-        });
-    </script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="/CelebiSeyehat/js/accordion.js"></script>
 </body>
 </html>

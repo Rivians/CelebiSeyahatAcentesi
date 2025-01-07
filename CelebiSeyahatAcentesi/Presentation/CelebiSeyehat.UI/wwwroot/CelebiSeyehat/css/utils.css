@@ -200,6 +200,7 @@
 .footer p {
     line-height: 1.6;
     color: #dcdcdc;
+    
 }
 
 .footer h5 {
@@ -212,6 +213,7 @@
 .footer-contact {
     list-style: none;
     padding-left: 0;
+    
 }
 
 .footer-links li,

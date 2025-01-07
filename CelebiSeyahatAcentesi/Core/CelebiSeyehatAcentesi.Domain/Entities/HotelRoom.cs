@@ -13,10 +13,9 @@ namespace CelebiSeyahat.Domain.Entities
         public string HotelId { get; set; }
         public string RoomNumber { get; set; }
         public int Capacity { get; set; }
-        public int Price { get; set; }
         public string CoverImageUrl { get; set; }
         public bool IsAvailable { get; set; }
-        public string HotelRoomTypeId { get; set; }
+        //public string HotelRoomTypeId { get; set; }
 
 
         public Hotel Hotel { get; set; }

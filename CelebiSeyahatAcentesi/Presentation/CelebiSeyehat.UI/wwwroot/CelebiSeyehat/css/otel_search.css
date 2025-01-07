@@ -1,0 +1,290 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+.container {
+    padding: 1rem;
+    
+}
+
+/* Sol Filtreleme Bölümü */
+.filters {
+    background-color: #fff;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+}
+
+.filters h3 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.filter-group {
+    margin-bottom: 1.5rem;
+}
+
+.filter-group h4 {
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+.filter-group label {
+    display: block;
+    margin-bottom: 0.3rem;
+    color: #666;
+}
+
+.price-range {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+}
+
+
+.price{
+    display: flex;
+    align-items: right ;
+    gap: 10px;
+    font-size: 25px;
+}
+
+
+
+.price-range label {
+    font-weight: bold;
+    font-size: 14px;
+    color: #333; 
+}
+
+.price-inputs input[type="number"] {
+    width: 100px; 
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+}
+.price-inputs input[type="number"]::-webkit-inner-spin-button,
+.price-inputs input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.price-inputs input[type="number"]:focus {
+    border-color: #2d4d4e;
+    outline: none;
+    box-shadow: 0 0 5px #2d4d4e; /
+}
+
+
+
+
+.accordion {
+    display: block;
+  text-decoration: none; 
+  background-color: #deeced;
+  color: #333;
+  padding: 15px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+  
+
+.tk{
+    background-color: #ffffff;
+    color: #444;
+    cursor: pointer;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+    
+}
+  
+.active, .accordion:hover {
+    background-color: #bed9da;
+}
+  
+.accordion:after {
+    content: '\002B';
+    color: #777;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+  
+.active:after {
+    content: "\2212";
+}
+  
+.panel {
+    padding: 0 18px;
+    margin-bottom: 10px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    
+}
+
+
+
+
+.filter-actions .apply-filters {
+    background-color: #539092; 
+    color: #fff; 
+    border: none; 
+    padding: 10px 20px; 
+    font-size: 16px; 
+    border-radius: 5px;
+    cursor: pointer; 
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.filter-actions .apply-filters:hover {
+    background-color: #3f797a; 
+}
+
+.filter-actions .apply-filters:active {
+    background-color: #65aeb1; 
+    transform: scale(0.98); 
+}
+.filter-actions .apply-filters:focus {
+    outline: none;
+    box-shadow: 0 0 5px #539092;
+   
+}
+
+.filter-actions {
+    margin-top: 20px;
+    text-align: center;
+}
+
+
+
+/* Sağ Bilet Kartları */
+.tickets {
+    padding-left: 1rem;
+}
+
+.tickets h2 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.ticket-card {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    align-items: center;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.ticket-card .column {
+    display: flex;
+    flex-direction: column;
+    justify-content:left;
+}
+
+.ticket-card p {
+    margin: 0;
+    color: #000000;
+}
+.image {
+    width: 200px;
+    height: 150px;
+    border-radius: 8px;
+}
+
+.ticket-card h3{
+    margin: 0;
+    color: #000000;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.rating {
+    padding: 10px;
+    text-align: center;
+    min-width: 50px;
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 5px; 
+}
+
+.rating-info {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    text-align: center;
+    
+}
+
+.rating-score{
+    font-size: 1.5rem;
+    color: #2d4d4e;
+    background-color: #bed9da;
+    border-radius: 15px;
+    width: 50px;
+
+}
+
+.review-count {
+    font-size: 0.8rem;
+    color: #333;
+    margin-top: 5px;
+}
+
+
+.price-info{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.firm h4 {
+    margin: 0;
+    color: #2d4d4e;
+}
+
+.time, .price {
+    font-weight: bold;
+    color: #333;
+}
+
+.button button {
+    background-color: #65aeb1;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.button button:hover {
+    background-color: #539092;
+}
+
+
+
+
+

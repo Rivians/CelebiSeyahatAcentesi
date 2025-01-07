@@ -10,6 +10,7 @@ namespace CelebiSeyahat.Domain.Entities
     public class RoomType : BaseEntity
     {
         public string Name { get; set; }
+        public int Price { get; set; }
         public string Description { get; set; }
         public string HotelId { get; set; }
 

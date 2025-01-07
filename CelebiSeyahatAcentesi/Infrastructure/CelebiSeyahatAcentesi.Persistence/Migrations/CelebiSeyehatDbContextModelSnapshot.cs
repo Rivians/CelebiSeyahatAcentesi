@@ -191,15 +191,8 @@ namespace CelebiSeyahat.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("HotelRoomTypeId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("IsAvailable")
                         .HasColumnType("bit");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
 
                     b.Property<string>("RoomNumber")
                         .IsRequired()
@@ -391,6 +384,9 @@ namespace CelebiSeyahat.Persistence.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedTime")
                         .HasColumnType("datetime2");

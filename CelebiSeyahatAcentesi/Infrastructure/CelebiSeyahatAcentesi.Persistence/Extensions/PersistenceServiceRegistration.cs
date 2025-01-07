@@ -52,17 +52,19 @@ namespace CelebiSeyahat.Persistence.Extensions
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<ITransportationCompanyService, TransportationCompanyService>();
             services.AddScoped<IHotelService, HotelService>();
+			services.AddScoped<IHotelFeatureService, HotelFeatureService>();
+			services.AddScoped<IEnumService, EnumService>();
 
-            // ---- repolar
+			// ---- repolar
 
-            services.AddScoped<ITripRepository, TripRepository>();
+			services.AddScoped<ITripRepository, TripRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<ITransportationCompanyRepository, TransportationCompanyRepository>();
             services.AddScoped<IHotelRepository, HotelRepository>();
 
 
-            // ---- IHttpContextAccessor 
-            services.AddHttpContextAccessor();
+			// ---- IHttpContextAccessor 
+			services.AddHttpContextAccessor();
         }   
     }
 }
