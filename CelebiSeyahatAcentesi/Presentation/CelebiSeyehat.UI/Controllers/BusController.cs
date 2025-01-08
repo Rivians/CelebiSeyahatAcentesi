@@ -142,21 +142,14 @@ namespace CelebiSeyehat.UI.Controllers
             viewModel.AppUser.Customer.TcNo = viewModel.Passengers[0].PassengerTcNo;
             viewModel.PassengerCount = viewModel.Passengers.Count();
 
-            var jsonStringPassengers = JsonConvert.SerializeObject(viewModel.Passengers);
+            var jsonPassengers = JsonConvert.SerializeObject(viewModel.Passengers);
 
-            HttpContext.Session.SetString("Passengers", jsonStringPassengers);
+            HttpContext.Session.SetString("Passengers", jsonPassengers);
 
             var serializedReservationData = JsonConvert.SerializeObject(viewModel);
-            var base64EncodedData = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(serializedReservationData));
+			HttpContext.Session.SetString("TripRezervation", serializedReservationData);
 
-            try
-            {
-                return RedirectToAction("Index", "Payment", new { data = base64EncodedData });
-            }
-            catch(Exception ex)
-            {
-                throw new Exception($"hata : {ex.Message}");
-            }
-        }
+			return RedirectToAction("Index", "Payment");
+		}
 	}
 }

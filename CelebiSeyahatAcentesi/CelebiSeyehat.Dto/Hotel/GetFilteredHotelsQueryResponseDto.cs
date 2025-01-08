@@ -15,7 +15,7 @@ namespace CelebiSeyehat.Dto.Hotel
         public string Name { get; set; }
 		public string Description { get; set; }
 		public string Location { get; set; }
-		public double GuestRating { get; set; }
+		public decimal GuestRating { get; set; }
 		public string PensionType { get; set; }
 		public string CoverImageUrl { get; set; }
 

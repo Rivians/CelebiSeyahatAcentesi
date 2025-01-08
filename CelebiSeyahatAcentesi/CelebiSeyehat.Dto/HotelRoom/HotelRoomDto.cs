@@ -17,8 +17,13 @@ namespace CelebiSeyehat.Dto.HotelRoom
         public int Capacity { get; set; }
         public string CoverImageUrl { get; set; }
         public bool IsAvailable { get; set; }
-        //public string HotelRoomTypeId { get; set; }
+		//public string HotelRoomTypeId { get; set; }
 
 
-    }
+		// buraya roomtypedto verilebilir
+		public RoomTypeDto RoomType { get; set; }
+
+		
+
+	}
 }

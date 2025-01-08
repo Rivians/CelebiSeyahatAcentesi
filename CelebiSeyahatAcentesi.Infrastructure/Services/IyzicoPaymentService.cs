@@ -40,8 +40,8 @@ namespace CelebiSeyahat.Infrastructure.Services
 				Email = request.BuyerEmail,
 				GsmNumber = request.BuyerGsmNumber,
 				IdentityNumber = request.BuyerIdentityNumber,
-				//Ip = request.BuyerIp,
-				Ip = "85.34.78.112",
+				Ip = request.BuyerIp,
+				//Ip = "85.34.78.112",
                 RegistrationAddress = request.BillingAddress,
 				City = request.BuyerCity,
 				Country = request.BuyerCountry,
@@ -54,7 +54,7 @@ namespace CelebiSeyahat.Infrastructure.Services
 				ZipCode = request.BuyerZipCode,
 				Country = request.BuyerCountry,
 				City = request.BuyerCity,
-				Description = "adressss",
+				Description = "adressss",				
 			};
 
 			var basketItem = new List<BasketItem>
@@ -89,7 +89,10 @@ namespace CelebiSeyahat.Infrastructure.Services
 				PaymentGroup = PaymentGroup.PRODUCT.ToString(),  // Ürün satın alımı için yapılan ödeme.
 				EnabledInstallments = new List<int> { 1 },      // Taksitsiz işlem
 				CallbackUrl = "https://localhost:7053/Payment/PaymentCallback",  // Callback URL		
-				//ForceThreeDS = 1,				
+				//ForceThreeDS = 1,		
+				PaymentSource = "123123",
+				PosOrderId = "asdasd13",
+				
 			};
 
             // 5528 7900 0000 0008

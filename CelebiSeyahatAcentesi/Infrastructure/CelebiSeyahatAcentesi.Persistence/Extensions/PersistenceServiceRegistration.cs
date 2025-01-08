@@ -53,6 +53,7 @@ namespace CelebiSeyahat.Persistence.Extensions
             services.AddScoped<ITransportationCompanyService, TransportationCompanyService>();
             services.AddScoped<IHotelService, HotelService>();
 			services.AddScoped<IHotelFeatureService, HotelFeatureService>();
+			services.AddScoped<IHotelReservationService, HotelReservationService>();
 			services.AddScoped<IEnumService, EnumService>();
 
 			// ---- repolar
@@ -61,7 +62,7 @@ namespace CelebiSeyahat.Persistence.Extensions
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<ITransportationCompanyRepository, TransportationCompanyRepository>();
             services.AddScoped<IHotelRepository, HotelRepository>();
-
+            services.AddScoped<IHotelReservationRepository, HotelReservationRepository>();
 
 			// ---- IHttpContextAccessor 
 			services.AddHttpContextAccessor();

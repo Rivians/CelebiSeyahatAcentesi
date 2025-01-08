@@ -41,6 +41,7 @@ namespace CelebiSeyahat.Persistence.Context
         public DbSet<TransportationCompany> TransportationCompanies { get; set; }
         public DbSet<Trip> Trips { get; set; }
         public DbSet<Location> Locations { get; set; }
+        public DbSet<Guest> Guests { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

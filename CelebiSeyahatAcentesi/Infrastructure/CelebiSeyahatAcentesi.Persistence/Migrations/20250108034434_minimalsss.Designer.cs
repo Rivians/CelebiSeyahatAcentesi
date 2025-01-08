@@ -4,6 +4,7 @@ using CelebiSeyahat.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CelebiSeyahat.Persistence.Migrations
 {
     [DbContext(typeof(CelebiSeyehatDbContext))]
-    partial class CelebiSeyehatDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250108034434_minimalsss")]
+    partial class minimalsss
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,10 +82,6 @@ namespace CelebiSeyahat.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("HotelReservationId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -103,8 +102,6 @@ namespace CelebiSeyahat.Persistence.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("HotelReservationId");
 
                     b.ToTable("Guests");
                 });
@@ -806,17 +803,6 @@ namespace CelebiSeyahat.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("AppUser");
-                });
-
-            modelBuilder.Entity("CelebiSeyahat.Domain.Entities.Guest", b =>
-                {
-                    b.HasOne("CelebiSeyahat.Domain.Entities.HotelReservation", "HotelReservation")
-                        .WithMany()
-                        .HasForeignKey("HotelReservationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("HotelReservation");
                 });
 
             modelBuilder.Entity("CelebiSeyahat.Domain.Entities.HotelReservation", b =>

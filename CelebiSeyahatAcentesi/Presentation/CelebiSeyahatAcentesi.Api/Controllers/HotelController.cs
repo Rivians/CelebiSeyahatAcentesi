@@ -108,5 +108,20 @@ namespace CelebiSeyahat.Api.Controllers
             }
         }
 
+		[HttpGet("GetHotelReservationByRoomId/{id}")]
+		public async Task<IActionResult> GetHotelReservationByRoomId(string id)
+		{
+			var query = new GetHotelReservationByHotelRoomIdQuery(id);
+			var response = await _mediator.Send(query);
+			if (response != null)
+			{
+				return Ok(response);
+			}
+			else
+			{
+				return BadRequest();
+			}
+		}
+
 	}
 }

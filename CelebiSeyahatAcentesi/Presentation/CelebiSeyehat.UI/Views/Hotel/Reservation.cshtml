@@ -1,10 +1,11 @@
 ﻿@using CelebiSeyehat.UI.ViewModels.Reservation
-@model TransportationReservationViewModel
+@model HotelReservationViewModel
+
 
 @{
 	Layout = null;
 
-	var ticketPrice = Model.Trip.TicketPrice * Model.PassengerCount;
+	// var totalPrice = Model.Trip.TicketPrice * Model.PassengerCount;
 }
 
 <!DOCTYPE html>
@@ -29,7 +30,7 @@
 
 	<div class="container">
 
-		<form asp-action="Reservation" asp-controller="Bus" method="post">
+		<form asp-action="Reservation" asp-controller="Hotel" method="post">
 
 			<div class="row">
 
@@ -48,28 +49,28 @@
 					</div>
 
 
-					@for (int i = 0; i < Model.PassengerCount; i++)
+					@for (int i = 0; i < Model.GuestCount; i++)
 					{
-						<!-- Yolcu Bilgileri-->
+						<!-- Misafir Bilgileri-->
 						<div class="card">
-							<div class="card-header">- Yolcu Bilgileri -</div>
+							<div class="card-header">- Misafir Bilgileri -</div>
 							<div class="card-body">
 								<label class="form-label">Ad *</label>
-								<input type="text" asp-for="@Model.Passengers[i].PassengerName" placeholder="Adınızı giriniz">
+								<input type="text" asp-for="@Model.Guests[i].Name" placeholder="Adınızı giriniz">
 
 								<label class="form-label">Soyad *</label>
-								<input type="text" asp-for="@Model.Passengers[i].PassengerSurname" placeholder="Soyadınızı giriniz">
+								<input type="text" asp-for="@Model.Guests[i].Surname" placeholder="Soyadınızı giriniz">
 
 								<label class="form-label">TC Kimlik No *</label>
-								<input type="text" asp-for="@Model.Passengers[i].PassengerTcNo" placeholder="TC kimlik numaranızı giriniz">
+								<input type="text" asp-for="@Model.Guests[i].TcNo" placeholder="TC kimlik numaranızı giriniz">
 
 
 								<label class="form-label">Cinsiyet *</label>
 								<label class="tk">
-									<input type="radio" asp-for="@Model.Passengers[i].PassengerGender" value="Erkek"> Erkek
+									<input type="radio" asp-for="@Model.Guests[i].Gender" value="Erkek"> Erkek
 								</label>
 								<label class="tk">
-									<input type="radio" asp-for="@Model.Passengers[i].PassengerGender" value="Kadın"> Kadın
+									<input type="radio" asp-for="@Model.Guests[i].Gender" value="Kadın"> Kadın
 								</label>
 							</div>
 						</div>
@@ -80,14 +81,14 @@
 				<div class="col-md-3">
 
 					<div class="card">
-						<div class="card-header">Bilet Bilgileri</div>
+						<div class="card-header">Rezervasyon Bilgileri</div>
 						<div class="card-body">
-							<p><strong>Kalkış:</strong> @Model.Trip.Departure</p>
-							<p><strong>Varış:</strong> @Model.Trip.Destination</p>
-							<p><strong>Firma:</strong> @Model.Trip.TransportationCompanyId</p>
-							<p><strong>Tarih:</strong> @Model.Trip.DepartureDate.ToString("dd.MM.yyyy")</p>
-							<p><strong>Saat:</strong> @Model.Trip.DepartureDate.ToString("HH:mm")</p>
-							<p><strong>İptal Koşulları:</strong> Bilet iadesi, kalkış saatinden 24 saat önce yapılabilir.</p>
+							<p><strong>Otel Adı :</strong> @Model.Hotel.Name</p>
+							<p><strong>Oda No :</strong> @Model.HotelReservation.HotelRoom.RoomNumber</p>
+							<p><strong>Oda Türü :</strong> @Model.HotelReservation.HotelRoom.RoomType.Name</p>
+							<p><strong>Check-In Tarihi: </strong> @Model.HotelReservation.CheckInDate.ToString("dd-MMMM-yyyy")</p>
+							<p><strong>Check-Out Tarihi:</strong> @Model.HotelReservation.CheckInDate.ToString("dd-MMMM-yyyy")</p>
+							<p><strong>İptal Koşulları:</strong> Rezervasyon iptali, rezervasyon tarihinden 2 hafta saat önce yapılabilir.</p>
 						</div>
 					</div>
 				</div>
@@ -96,25 +97,26 @@
 
 			<div class="row payment-section">
 				<div class="col-md-5 text-start">
-					<h5>Toplam Tutar: @ticketPrice </h5>
+					<h5>Toplam Tutar: @(Model.HotelReservation.HotelRoom.RoomType.Price*Model.GuestCount) </h5>
 				</div>
 				<div class="col-md-4 text-end">
 					<button type="submit" class="btn-proceed">Ödemeye İlerle</button>
 				</div>
 			</div>
 
-			@* trip bilgiler hidden field ile *@
-			<input type="hidden" asp-for="Trip.Id" value="@Model.Trip.Id">
-			<input type="hidden" asp-for="Trip.Departure" value="@Model.Trip.Departure">
-			<input type="hidden" asp-for="Trip.Destination" value="@Model.Trip.Destination">
-			<input type="hidden" asp-for="Trip.DepartureDate" value="@Model.Trip.DepartureDate">
-			<input type="hidden" asp-for="Trip.ArrivalDate" value="@Model.Trip.ArrivalDate">
-			<input type="hidden" asp-for="Trip.TotalSeats" value="@Model.Trip.TotalSeats">
-			<input type="hidden" asp-for="Trip.AvailableSeats" value="@Model.Trip.AvailableSeats">
-			<input type="hidden" asp-for="Trip.TransportationCompanyId" value="@Model.Trip.TransportationCompanyId">
-			<input type="hidden" asp-for="Trip.TransportationType" value="@Model.Trip.TransportationType">
-			<input type="hidden" asp-for="Trip.CompanyCoverImageUrl" value="@Model.Trip.CompanyCoverImageUrl">
-			<input type="hidden" asp-for="Trip.TicketPrice" value="@Model.Trip.TicketPrice">
+
+						@* hotel bilgiler hidden field ile *@
+			<input type="hidden" asp-for="Hotel.Id" value="@Model.Hotel.Id">
+			<input type="hidden" asp-for="Hotel.Name" value="@Model.Hotel.Name">
+			<input type="hidden" asp-for="Hotel.Description" value="@Model.Hotel.Description">
+			<input type="hidden" asp-for="Hotel.Location" value="@Model.Hotel.Location">
+			<input type="hidden" asp-for="Hotel.GuestRating" value="@Model.Hotel.GuestRating">
+			<input type="hidden" asp-for="Hotel.PensionType" value="@Model.Hotel.PensionType">
+			<input type="hidden" asp-for="Hotel.CoverImageUrl" value="@Model.Hotel.CoverImageUrl">
+
+			@* hotel room bilgiler hidden field ile *@
+			@* ????????? *@
+
 
 			@* appUser bilgileri hidden field ile *@
 			<input type="hidden" asp-for="AppUser.Id" value="@Model.AppUser.Id" />
@@ -126,7 +128,11 @@
 			<input type="hidden" asp-for="AppUser.Customer.FirstName" value="@Model.AppUser.Name" />
 			<input type="hidden" asp-for="AppUser.Customer.LastName" value="@Model.AppUser.Surname" />
 			<input type="hidden" asp-for="AppUser.Customer.Email" value="@Model.AppUser.Email" />
-			<input type="hidden" asp-for="AppUser.Customer.PhoneNumber" value="@Model.AppUser.PhoneNumber" />
+			<input type="hidden" asp-for="AppUser.Customer.PhoneNumber" value="@Model.AppUser.PhoneNumber" /> 
+
+
+
+
 
 		</form>
 

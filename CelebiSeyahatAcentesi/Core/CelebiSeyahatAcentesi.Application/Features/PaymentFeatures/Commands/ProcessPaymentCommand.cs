@@ -9,14 +9,6 @@ namespace CelebiSeyahat.Application.Features.PaymentFeatures.Commands
 {
 	public class ProcessPaymentCommand : IRequest<ProcessPaymentCommandResponse>
 	{
-		// Ödeme Bilgileri 
-		//public string CardHolderName { get; set; }		KART BİLGİLER İYZİCO FORM İÇERİSİNDEN DİREKT İYİZO'YA GÖNDERİLİR.
-		//public string CardNumber { get; set; }			VERİTABANINDA BOŞUNA TUTULMASINA GEREK YOK.
-		//public string ExpireMonth { get; set; }
-		//public string ExpireYear { get; set; }
-		//public string Cvc { get; set; }
-
-
 		// Kullanıcı (Buyer) Bilgileri
 		public string BuyerId { get; set; }
 		public string BuyerName { get; set; }
@@ -43,7 +35,14 @@ namespace CelebiSeyahat.Application.Features.PaymentFeatures.Commands
 		public string CallbackUrl { get; set; }
 
 
-		// Para Birimi
-		//public string Currency { get; set; }
-	}
+        // Para Birimi
+        //public string Currency { get; set; }
+
+        // Ödeme Bilgileri 
+        //public string CardHolderName { get; set; }		KART BİLGİLER İYZİCO FORM İÇERİSİNDEN DİREKT İYİZO'YA GÖNDERİLİR.
+        //public string CardNumber { get; set; }			VERİTABANINDA BOŞUNA TUTULMASINA GEREK YOK.
+        //public string ExpireMonth { get; set; }
+        //public string ExpireYear { get; set; }
+        //public string Cvc { get; set; }
+    }
 }

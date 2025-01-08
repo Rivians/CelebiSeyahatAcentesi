@@ -10,7 +10,7 @@ namespace CelebiSeyahat.Domain.Entities
 {
     public class Payment : BaseEntity
     {
-        public int Amount { get; set; }
+        public string Amount { get; set; }
         public DateTime PaymentDate { get; set; }
         public PaymentMethod PaymentMethod { get; set; }
         public string CustomerId { get; set; }

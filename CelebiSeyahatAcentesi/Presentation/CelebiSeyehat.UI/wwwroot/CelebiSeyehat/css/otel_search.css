@@ -63,37 +63,27 @@ body {
     color: #333; 
 }
 
-.price-inputs input[type="number"] {
-    width: 100px; 
-    padding: 5px;
-    font-size: 14px;
-    border: 1px solid #ccc; 
-    border-radius: 5px;
-}
+
 .price-inputs input[type="number"]::-webkit-inner-spin-button,
 .price-inputs input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-.price-inputs input[type="number"]:focus {
-    border-color: #2d4d4e;
-    outline: none;
-    box-shadow: 0 0 5px #2d4d4e; /
-}
+
 
 
 
 
 .accordion {
     display: block;
-  text-decoration: none; 
-  background-color: #deeced;
-  color: #333;
-  padding: 15px;
-  margin-bottom: 5px;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 16px;
+    text-decoration: none;
+    background-color: #deeced;
+    color: #333;
+    padding: 15px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
 }
 
   
@@ -200,6 +190,8 @@ body {
     justify-content:left;
 }
 
+
+
 .ticket-card p {
     margin: 0;
     color: #000000;
@@ -207,7 +199,6 @@ body {
 .image {
     width: 200px;
     height: 150px;
-    border-radius: 8px;
 }
 
 .ticket-card h3{
@@ -284,6 +275,15 @@ body {
     background-color: #539092;
 }
 
+
+@media screen and (max-width: 768px) {
+    .filters, .ticket-card {
+        flex-direction: column; /* Küçük ekranlarda elemanları dikey yerleştir */
+    }
+    .filter-actions {
+        text-align: left;
+    }
+}
 
 
 

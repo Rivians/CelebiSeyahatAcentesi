@@ -4,6 +4,7 @@ using CelebiSeyahat.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CelebiSeyahat.Persistence.Migrations
 {
     [DbContext(typeof(CelebiSeyehatDbContext))]
-    partial class CelebiSeyehatDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250108023159_added-guest-entity")]
+    partial class addedguestentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -810,13 +813,13 @@ namespace CelebiSeyahat.Persistence.Migrations
 
             modelBuilder.Entity("CelebiSeyahat.Domain.Entities.Guest", b =>
                 {
-                    b.HasOne("CelebiSeyahat.Domain.Entities.HotelReservation", "HotelReservation")
+                    b.HasOne("CelebiSeyahat.Domain.Entities.HotelReservation", "Ticket")
                         .WithMany()
                         .HasForeignKey("HotelReservationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("HotelReservation");
+                    b.Navigation("Ticket");
                 });
 
             modelBuilder.Entity("CelebiSeyahat.Domain.Entities.HotelReservation", b =>

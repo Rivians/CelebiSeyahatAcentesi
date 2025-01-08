@@ -1,9 +1,14 @@
-﻿using CelebiSeyehat.Dto.Payment;
+﻿using CelebiSeyehat.Dto.Hotel;
+using CelebiSeyehat.Dto.Payment;
 using CelebiSeyehat.Dto.Trip;
 using CelebiSeyehat.UI.ViewModels.Payment;
 using CelebiSeyehat.UI.ViewModels.Reservation;
+using Iyzipay.Model;
+using Iyzipay.Request;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Globalization;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace CelebiSeyehat.UI.Controllers
@@ -17,31 +22,35 @@ namespace CelebiSeyehat.UI.Controllers
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> Index(string data)
+		public async Task<IActionResult> Index(/*string data*/)
 		{
-			var base64DecodedList = Convert.FromBase64String(data);
-			var jsonData = Encoding.UTF8.GetString(base64DecodedList);
-			var reservationResults = JsonConvert.DeserializeObject<TransportationReservationViewModel>(jsonData);
+			var hotelRezervationJson = HttpContext.Session.GetString("HotelRezervation");
+			var hotelRezervation = JsonConvert.DeserializeObject<HotelReservationViewModel>(hotelRezervationJson);
+
+			//var tripRezervationJson = HttpContext.Session.GetString("TripRezervation");
+			//var tripRezervation = JsonConvert.DeserializeObject<TransportationReservationViewModel>(tripRezervationJson);
 
 			var paymentRequest = new ProcessPaymentCommandDto()
 			{
-				BuyerId = reservationResults.AppUser.Customer.Id,
-				BuyerName = reservationResults.AppUser.Customer.FirstName,
-				BuyerSurname = reservationResults.AppUser.Customer.LastName,
-				BuyerEmail = reservationResults.AppUser.Customer.Email,
-				BuyerGsmNumber = reservationResults.AppUser.Customer.PhoneNumber,
+				BuyerId = hotelRezervation.AppUser.Customer.Id,
+				BuyerName = hotelRezervation.AppUser.Customer.FirstName,
+				BuyerSurname = hotelRezervation.AppUser.Customer.LastName,
+				BuyerEmail = hotelRezervation.AppUser.Customer.Email,
+				BuyerGsmNumber = hotelRezervation.AppUser.Customer.PhoneNumber,
 				BuyerCity = "Istanbul",
 				BuyerCountry = "Turkiye",
-				BuyerIdentityNumber = reservationResults.Passengers[0].PassengerTcNo,
+				BuyerIdentityNumber = hotelRezervation.Guests[0].TcNo,
 				BuyerZipCode = "34760",
 				BillingAddress = "billging addderesss",
 				BuyerAddress = "buyerr adressss",
 				ShippingAddress = "shipppinggg adress",
 				BuyerIp = HttpContext.Connection.RemoteIpAddress.ToString(),
 				PaymentId = Guid.NewGuid().ToString(),
-				Price = (decimal)(reservationResults.Trip.TicketPrice * reservationResults.PassengerCount),
-				PaidPrice = (decimal)(reservationResults.Trip.TicketPrice * reservationResults.PassengerCount),
-				CallbackUrl = "https://yourcallbackurl.com",
+				//Price = (decimal)(hotelRezervation * reservationResults.PassengerCount),
+				Price = 1500,
+				//PaidPrice = (decimal)(reservationResults.Trip.TicketPrice * reservationResults.PassengerCount),
+				PaidPrice = 1500,
+				CallbackUrl = "",
 			};
 
 			var client = _httpClientFactory.CreateClient();
@@ -65,61 +74,52 @@ namespace CelebiSeyehat.UI.Controllers
 			return View();
 		}
 
-        //[HttpPost]
-        //public IActionResult PaymentCallback(ProcessPaymentCommandResponseDto response)
-        //{
-        //	if (response.IsSuccess)
-        //	{
-        //		// Ödeme başarılı, kullanıcıya başarı bilgisi gösterilir.
-        //		return RedirectToAction("Callback", new { success = true });
-        //	}
-        //	else
-        //	{
-        //		// Ödeme başarısız, hata bilgisi kullanıcıya gösterilir.
-        //		return RedirectToAction("Callback", new { success = false, message = response.Message });
-        //	}
-        //}
-
         [HttpPost]
-        public async Task<IActionResult> PaymentCallback([FromForm] string token, [FromForm] string paymentId)
+        public async Task<IActionResult> PaymentCallback([FromForm] string token)
         {
-            // Doğrulama isteği hazırlama
             var client = _httpClientFactory.CreateClient();
-            var verifyRequest = new
+
+            Iyzipay.Options options = new Iyzipay.Options()
             {
-                PaymentId = paymentId,
-                Token = token
+                ApiKey = "sandbox-ea0DfUR4EfJtHGN3J7W4XYJVLryaRTFU",
+                SecretKey = "sandbox-JuuBsQV3D0HDHXEONqr7srypCpSC1AbE",
+                BaseUrl = "https://sandbox-api.iyzipay.com"
             };
 
-            var response = await client.PostAsJsonAsync("https://sandbox-api.iyzipay.com/payment/iyzipos/checkoutform/ecom/detail", verifyRequest);
+			var request = new RetrieveCheckoutFormRequest
+			{
+				Token = token,
+			};
 
-            if (response.IsSuccessStatusCode)
+            var checkoutForm = CheckoutForm.Retrieve(request, options);
+
+			if(checkoutForm.Result.PaymentStatus == "SUCCESS")
             {
-                var json = await response.Content.ReadAsStringAsync();
-                var verificationResult = JsonConvert.DeserializeObject<ProcessPaymentCommandResponseDto>(json);
+				// Ödeme başarılı
+				var paymentDetails = new PaymentDto
+				{
+					Id = checkoutForm.Result.PaymentId,
+					PaymentStatus = checkoutForm.Result.PaymentStatus,
+                    Amount = checkoutForm.Result.PaidPrice,
+                    PaymentDate = DateTime.Now
+				};
 
-				if (verificationResult.IsSuccess)
-				{
-					// Ödeme başarılı
-					return RedirectToAction("Callback", new { success = true });
-				}
-				else
-				{
-					return RedirectToAction("CallBack", new { success = "false" , error = $"{verificationResult.Message}"});
-				}
+                return RedirectToAction("Callback", new { success = true, paymentDetails = JsonConvert.SerializeObject(paymentDetails) });
             }
-			return View();
-
-            // Ödeme başarısız
-		
-            //return RedirectToAction("Callback", new { success = false, error = $"{verifyRequest.}" });
+			else
+			{
+                // Ödeme başarısız
+                return RedirectToAction("Callback", new { success = false, error = checkoutForm.Result.ErrorMessage });
+            }
         }
 
 
         [HttpGet]
-		public IActionResult Callback(bool success, string message = null)
+		public IActionResult Callback(string paymentDetails, bool success, string message = null)
 		{
-			var viewModel = new PaymentResultViewModel
+            var paymentDetailsDto = JsonConvert.DeserializeObject<PaymentDto>(paymentDetails);
+
+            var viewModel = new PaymentResultViewModel
 			{
 				IsSuccess = success,
 				ErrorCode = message
